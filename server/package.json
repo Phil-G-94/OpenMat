@@ -6,8 +6,9 @@
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "node --watch app.js",
-        "start": "node app.js",
+        "build": "tsc",
+        "dev": "node --watch ./dist/app.js",
+        "start": "node ./dist/app.js",
         "prettier": "npx prettier . --write"
     },
     "author": "",
@@ -17,6 +18,7 @@
         "express": "^4.21.2"
     },
     "devDependencies": {
+        "@types/express": "^5.0.0",
         "typescript": "^5.7.3"
     },
     "prettier": {
