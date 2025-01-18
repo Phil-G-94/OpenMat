@@ -2,16 +2,18 @@ import dotenv from "dotenv";
 import express, { urlencoded, json } from "express";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
+import connectToDatabase from "./database/connection.js";
+import mongoose from "mongoose";
 // load env variables
 dotenv.config();
 // initialise express app
 const app = express();
 // middleware
-app.use(urlencoded({ extended: false }));
+app.use(urlencoded({ extended: true }));
 app.use(json({}));
 // routes
 app.get("/", (req, res) => {
-    res.json({ message: "HelloWorld" });
+    res.json({ message: "Hello World" });
 });
 app.use(authRoutes);
 // error-handling middleware
@@ -25,7 +27,10 @@ app.use((err, req, res, next) => {
 });
 // start http server
 (async function startServer() {
+    // db uri
+    const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.2tmeo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
     try {
+        await connectToDatabase(dbUri);
         app.listen(process.env.PORT || 8080, () => {
             console.log(
                 "Server is running on port",
@@ -37,3 +42,12 @@ app.use((err, req, res, next) => {
         process.exitCode = 1;
     }
 })();
+// graceful shutdown handling
+const handleShutdown = async (signal) => {
+    console.log(`${signal} received. Closing database connection...`);
+    await mongoose.disconnect();
+    console.log("Database connection closed. Exiting process.");
+    process.exit(0);
+};
+process.on("SIGINT", () => handleShutdown("SIGINT"));
+process.on("SIGTERM", () => handleShutdown("SIGTERM"));

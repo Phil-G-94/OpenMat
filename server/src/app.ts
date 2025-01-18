@@ -8,6 +8,8 @@ import express, {
 } from "express";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
+import connectToDatabase from "./database/connection.js";
+import mongoose from "mongoose";
 
 // load env variables
 dotenv.config();
@@ -50,7 +52,11 @@ app.use(
 
 // start http server
 (async function startServer() {
+    // db uri
+    const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.2tmeo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+
     try {
+        await connectToDatabase(dbUri);
         app.listen(process.env.PORT || 8080, () => {
             console.log(
                 "Server is running on port",
@@ -62,3 +68,18 @@ app.use(
         process.exitCode = 1;
     }
 })();
+
+// graceful shutdown handling
+
+const handleShutdown = async (signal: string) => {
+    console.log(`${signal} received. Closing database connection...`);
+
+    await mongoose.disconnect();
+
+    console.log("Database connection closed. Exiting process.");
+
+    process.exit(0);
+};
+
+process.on("SIGINT", () => handleShutdown("SIGINT"));
+process.on("SIGTERM", () => handleShutdown("SIGTERM"));

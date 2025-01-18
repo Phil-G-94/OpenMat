@@ -1,16 +1,5 @@
-import mongoose, { Document, Schema, ObjectId } from "mongoose";
-
-interface AnswerInterface extends Document {
-    questionId: ObjectId;
-    authorId: ObjectId;
-    content: string;
-    upvotes: number;
-    downvotes: number;
-    // createdAt: Date;
-    // updatedAt: Date;
-}
-
-const AnswerSchema = new Schema<AnswerInterface>(
+import { Schema } from "mongoose";
+const AnswerSchema = new Schema(
     {
         questionId: {
             type: Schema.Types.ObjectId,
