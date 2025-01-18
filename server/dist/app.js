@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import express, { urlencoded, json, } from "express";
+import express, { urlencoded, json } from "express";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
 // load env variables
@@ -27,10 +27,12 @@ app.use((err, req, res, next) => {
 (async function startServer() {
     try {
         app.listen(process.env.PORT || 8080, () => {
-            console.log("Server is running on port", process.env.PORT || 8080);
+            console.log(
+                "Server is running on port",
+                process.env.PORT || 8080
+            );
         });
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error);
         process.exitCode = 1;
     }

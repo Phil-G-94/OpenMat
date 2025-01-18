@@ -16,13 +16,13 @@ dotenv.config();
 const app = express();
 
 // middleware
-app.use(urlencoded({ extended: false }));
+app.use(urlencoded({ extended: true }));
 
 app.use(json({}));
 
 // routes
 app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "HelloWorld" });
+    res.json({ message: "Hello World" });
 });
 
 app.use(authRoutes);
