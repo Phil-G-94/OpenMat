@@ -13,7 +13,7 @@ const UserSchema = new Schema<UserInterface>(
         username: { type: "String", required: true, unique: true },
         email: { type: "String", required: true, unique: true },
         password: { type: "String", required: true },
-        reputation: { type: "Number" },
+        reputation: { type: "Number", default: 0 },
         rank: { type: "String", default: "Rookie" },
     },
     { timestamps: true }
