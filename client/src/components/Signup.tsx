@@ -6,7 +6,8 @@ export default function Signup() {
     };
 
     return (
-        <section className="flex justify-center">
+        <section className="flex flex-col items-center gap-6">
+            <h2 className="text-2xl">Sign up</h2>
             <form
                 className="flex flex-col justify-center gap-2"
                 action="/auth/signup"
@@ -52,6 +53,7 @@ export default function Signup() {
                     id="signup_password"
                     autoComplete="new-password"
                 />
+                <button className="text-lg">Sign up</button>
             </form>
         </section>
     );
