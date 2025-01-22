@@ -10,6 +10,7 @@ import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
 import connectToDatabase from "./database/connection.js";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 // load env variables
 dotenv.config();
@@ -22,9 +23,11 @@ app.use(urlencoded({ extended: true }));
 
 app.use(json({}));
 
+app.use(cookieParser());
+
 // routes
 app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "Hello World" });
+    res.status(200).json({ message: "Hello World" });
 });
 
 app.use(authRoutes);

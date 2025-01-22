@@ -1,5 +1,26 @@
+import {
+    Route,
+    createBrowserRouter,
+    createRoutesFromElements,
+    RouterProvider,
+} from "react-router";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import RootLayout from "./pages/RootLayout";
+import HomePage from "./pages/HomePage";
+
 function App() {
-    return <h1>OpenMat</h1>;
+    const router = createBrowserRouter(
+        createRoutesFromElements(
+            <Route path="/" element={<RootLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="login" element={<Login />} />
+            </Route>
+        )
+    );
+
+    return <RouterProvider router={router} />;
 }
 
 export default App;

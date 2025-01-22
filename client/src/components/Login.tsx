@@ -12,20 +12,20 @@ export default function Login() {
                 name="loginForm"
                 onSubmit={onSubmitHandler}
             >
-                <label>
-                    <input
-                        type="text"
-                        name="login_username"
-                        id="login_username"
-                        autoComplete="username"
-                    />
-                    <input
-                        type="password"
-                        name="login_password"
-                        id="login_password"
-                        autoComplete="current-password"
-                    />
-                </label>
+                <label htmlFor="login_username">Username</label>
+                <input
+                    type="text"
+                    name="login_username"
+                    id="login_username"
+                    autoComplete="username"
+                />
+                <label htmlFor="login_password">Username</label>
+                <input
+                    type="password"
+                    name="login_password"
+                    id="login_password"
+                    autoComplete="current-password"
+                />
             </form>
         </section>
     );
