@@ -1,3 +1,5 @@
+import Home from "../components/Home";
+
 export default function HomePage() {
-    return <h1>Welcome to Open Mat</h1>;
+    return <Home />;
 }

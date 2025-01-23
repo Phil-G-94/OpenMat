@@ -4,9 +4,12 @@ export default function PrimaryNavigation() {
     return (
         <header>
             <nav>
-                <ul>
+                <ul className="flex flex-row gap-4">
                     <li>
-                        <NavLink to="signup"> Sign up</NavLink>
+                        <NavLink to="/"> Home </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="signup"> Sign up </NavLink>
                     </li>
                     <li>
                         <NavLink to="login"> Log In </NavLink>

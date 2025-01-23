@@ -6,6 +6,7 @@ import express, {
     Response,
     NextFunction,
 } from "express";
+import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
 import connectToDatabase from "./database/connection.js";
@@ -17,6 +18,27 @@ dotenv.config();
 
 // initialise express app
 const app = express();
+
+// CORS middleware
+
+const allowedOrigins = ["http://localhost:5173"];
+
+app.use(
+    cors({
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+        credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 
 // middleware
 app.use(urlencoded({ extended: true }));
@@ -30,7 +52,7 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200).json({ message: "Hello World" });
 });
 
-app.use(authRoutes);
+app.use("/auth", authRoutes);
 
 // error-handling middleware
 app.use(

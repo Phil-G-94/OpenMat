@@ -1,21 +1,41 @@
 import dotenv from "dotenv";
 import express, { urlencoded, json } from "express";
+import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
 import connectToDatabase from "./database/connection.js";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 // load env variables
 dotenv.config();
 // initialise express app
 const app = express();
+// CORS middleware
+const allowedOrigins = ["http://localhost:5173"];
+app.use(
+    cors({
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+        credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 // middleware
 app.use(urlencoded({ extended: true }));
 app.use(json({}));
+app.use(cookieParser());
 // routes
 app.get("/", (req, res) => {
-    res.json({ message: "Hello World" });
+    res.status(200).json({ message: "Hello World" });
 });
-app.use(authRoutes);
+app.use("/auth", authRoutes);
 // error-handling middleware
 app.use((err, req, res, next) => {
     const status = err instanceof CustomError ? err.statusCode : 500;

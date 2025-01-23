@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 
 export default function Login() {
-    const onSubmitHandler = (event: FormEvent) => {
+    const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     };
 
