@@ -20,6 +20,10 @@ router.post(
 router.post(
     "/login",
     (req: Request, res: Response, next: NextFunction) => {
+        console.log(req.body);
+
+        // find user in DB
+
         res.status(200).json({ message: "Login successful" });
     }
 );

@@ -1,8 +1,38 @@
 import { FormEvent } from "react";
+import useFetch from "../hooks/useFetch";
 
 export default function Login() {
-    const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+    const [postLoginUser, { loading, error }] = useFetch<{
+        username: string;
+        password: string;
+    }>(
+        "http://localhost:8080/auth/login",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        },
+        false,
+        false
+    );
+
+    const onSubmitHandler = async (
+        event: FormEvent<HTMLFormElement>
+    ) => {
         event.preventDefault();
+
+        if (!(event.target instanceof HTMLFormElement)) {
+            return;
+        }
+
+        const formData = new FormData(event.target);
+
+        const formDataObject = Object.fromEntries(formData.entries());
+
+        await postLoginUser({
+            body: JSON.stringify(formDataObject),
+        });
     };
 
     return (
@@ -40,8 +70,12 @@ export default function Login() {
                     id="login_password"
                     autoComplete="current-password"
                 />
-                <button className="text-lg">Log In</button>
+                <button className="text-lg">
+                    {loading ? "Logging in" : "Log in"}
+                </button>
             </form>
+
+            {error && <p>{error}</p>}
         </section>
     );
 }
