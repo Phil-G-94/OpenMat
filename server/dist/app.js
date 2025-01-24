@@ -48,7 +48,7 @@ app.use((err, req, res, next) => {
 // start http server
 (async function startServer() {
     // db uri
-    const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.2tmeo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+    const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.DB_PATH}`;
     try {
         await connectToDatabase(dbUri);
         app.listen(process.env.PORT || 8080, () => {

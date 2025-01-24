@@ -1,31 +1,12 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router } from "express";
+import { postSignup, postLogin } from "../controllers/auth.js";
 
 const router = Router();
 
 // signup route
-router.post(
-    "/signup",
-    (req: Request, res: Response, next: NextFunction) => {
-        console.log(req.body); // correctly logs user to console.
-
-        // create user with User model
-
-        // save to DB
-
-        res.status(200).json({ message: "Signup successful." });
-    }
-);
+router.post("/signup", postSignup);
 
 // login route
-router.post(
-    "/login",
-    (req: Request, res: Response, next: NextFunction) => {
-        console.log(req.body);
-
-        // find user in DB
-
-        res.status(200).json({ message: "Login successful" });
-    }
-);
+router.post("/login", postLogin);
 
 export { router };

@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, ObjectId } from "mongoose";
 
-interface AnswerInterface extends Document {
+interface IAnswer extends Document {
     questionId: ObjectId;
     authorId: ObjectId;
     content: string;
@@ -10,7 +10,7 @@ interface AnswerInterface extends Document {
     // updatedAt: Date;
 }
 
-const AnswerSchema = new Schema<AnswerInterface>(
+const AnswerSchema = new Schema<IAnswer>(
     {
         questionId: {
             type: Schema.Types.ObjectId,
@@ -22,9 +22,11 @@ const AnswerSchema = new Schema<AnswerInterface>(
             ref: "User",
             required: true,
         },
-        content: { type: "String", required: true },
-        upvotes: { type: "Number" },
-        downvotes: { type: "Number" },
+        content: { type: String, required: true },
+        upvotes: { type: Number },
+        downvotes: { type: Number },
     },
     { timestamps: true }
 );
+
+export const Answer = mongoose.model<IAnswer>("Answer", AnswerSchema);

@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, ObjectId } from "mongoose";
 
-interface QuestionInterface extends Document {
+interface IQuestion extends Document {
     title: string;
     description: string;
     tags: [string];
@@ -10,11 +10,11 @@ interface QuestionInterface extends Document {
     // updatedAt: Date,
 }
 
-const QuestionSchema = new Schema<QuestionInterface>(
+const QuestionSchema = new Schema<IQuestion>(
     {
-        title: { type: "String", required: true },
-        description: { type: "String", required: true },
-        tags: { type: ["String"], required: true },
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+        tags: { type: [String], required: true },
         authorId: {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -25,7 +25,7 @@ const QuestionSchema = new Schema<QuestionInterface>(
     { timestamps: true }
 );
 
-export const Question = mongoose.model<QuestionInterface>(
+export const Question = mongoose.model<IQuestion>(
     "Question",
     QuestionSchema
 );

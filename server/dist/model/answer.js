@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 const AnswerSchema = new Schema(
     {
         questionId: {
@@ -11,9 +11,10 @@ const AnswerSchema = new Schema(
             ref: "User",
             required: true,
         },
-        content: { type: "String", required: true },
-        upvotes: { type: "Number" },
-        downvotes: { type: "Number" },
+        content: { type: String, required: true },
+        upvotes: { type: Number },
+        downvotes: { type: Number },
     },
     { timestamps: true }
 );
+export const Answer = mongoose.model("Answer", AnswerSchema);
