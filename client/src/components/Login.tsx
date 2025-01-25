@@ -5,6 +5,7 @@ export default function Login() {
     const [postLoginUser, { loading, error }] = useFetch<{
         username: string;
         password: string;
+        data: string;
     }>(
         "http://localhost:8080/auth/login",
         {
@@ -12,6 +13,7 @@ export default function Login() {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",
         },
         false,
         false

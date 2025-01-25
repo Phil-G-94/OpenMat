@@ -9,10 +9,10 @@ export default function PrimaryNavigation() {
                         <NavLink to="/"> Home </NavLink>
                     </li>
                     <li>
-                        <NavLink to="signup"> Sign up </NavLink>
+                        <NavLink to="auth/signup"> Sign up </NavLink>
                     </li>
                     <li>
-                        <NavLink to="login"> Log In </NavLink>
+                        <NavLink to="auth/login"> Log In </NavLink>
                     </li>
                 </ul>
             </nav>

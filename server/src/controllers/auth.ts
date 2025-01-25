@@ -81,15 +81,21 @@ const postLogin = async (
     // sign token
 
     const token = jwt.sign(
-        { id: existingUser._id },
+        { userId: existingUser._id.toString() },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
     );
 
     // set token through cookies
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false,
+    });
 
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({
+        message: "Login successful",
+    });
 };
 
 export { postSignup, postLogin };

@@ -3,6 +3,7 @@ import express, { urlencoded, json } from "express";
 import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
+import { router as questionsRoute } from "./routes/questions.js";
 import connectToDatabase from "./database/connection.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -35,14 +36,18 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Hello World" });
 });
-app.use("/auth", authRoutes);
+app.use("/auth/", authRoutes);
+app.use(questionsRoute);
 // error-handling middleware
 app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
     const status = err instanceof CustomError ? err.statusCode : 500;
     const message = err.message;
     const data = err instanceof CustomError ? err.data : null;
     res.status(status)
-        .set("Content-Type", "application/json")
+        .set("Content-Type", "application.json")
         .json({ message, data });
 });
 // start http server

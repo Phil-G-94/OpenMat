@@ -11,6 +11,7 @@ export default function Signup() {
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
         },
         false,
         false
