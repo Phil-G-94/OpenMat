@@ -15,8 +15,8 @@ export default function PrimaryNavigation() {
                         <NavLink to="auth/login"> Log In </NavLink>
                     </li>
                     <li>
-                        <NavLink to="myquestions">
-                            My Questions
+                        <NavLink to="questions">
+                            Post Question
                         </NavLink>
                     </li>
                 </ul>

@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import {
     Request,
     Response,
@@ -28,10 +28,6 @@ export const authJWT: RequestHandler = (
         ) as { userId: string };
 
         req.userId = verifiedToken.userId;
-
-        res.status(200).json({
-            message: "Valid token. Access authorised.",
-        });
 
         next();
     } catch (err) {

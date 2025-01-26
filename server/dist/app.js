@@ -3,7 +3,7 @@ import express, { urlencoded, json } from "express";
 import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
-// import { router as questionsRoute } from "./routes/questions.js";
+import { router as questionsRoutes } from "./routes/questions.js";
 import connectToDatabase from "./database/connection.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
 });
 app.get("/secure", authJWT);
 app.use("/auth", authRoutes);
+app.use(questionsRoutes);
 // error-handling middleware
 app.use((err, req, res, next) => {
     if (res.headersSent) {

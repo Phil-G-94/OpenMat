@@ -8,8 +8,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/HomePage";
+import QuestionForm from "./components/QuestionForm";
 import RequireAuth from "./pages/RequireAuth";
-import MyQuestions from "./pages/MyQuestions";
+// import RequireAuth from "./pages/RequireAuth";
 
 function App() {
     const router = createBrowserRouter(
@@ -19,13 +20,13 @@ function App() {
                 <Route path="auth/signup" element={<Signup />} />
                 <Route path="auth/login" element={<Login />} />
                 <Route
-                    path="myquestions"
+                    path="questions"
                     element={
                         <RequireAuth>
-                            <MyQuestions />
+                            <QuestionForm />
                         </RequireAuth>
                     }
-                ></Route>
+                />
             </Route>
         )
     );

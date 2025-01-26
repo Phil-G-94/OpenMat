@@ -1,12 +1,12 @@
+import Questions from "./Questions";
+
 export default function Home() {
     return (
-        <section className="flex flex-col items-center">
+        <section className="flex flex-col items-center gap-6">
+            <h1 className="text-4xl">Welcome To OpenMat</h1>
+
             <article>
-                <h1>Welcome To Open Mat</h1>
-                <p>
-                    The Q&A platform for martial arts and their
-                    practitioners
-                </p>
+                <Questions />
             </article>
         </section>
     );
