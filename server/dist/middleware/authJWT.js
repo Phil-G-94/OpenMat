@@ -13,6 +13,9 @@ export const authJWT = (req, res, next) => {
             process.env.JWT_SECRET
         );
         req.userId = verifiedToken.userId;
+        res.status(200).json({
+            message: "Valid token. Access authorised.",
+        });
         next();
     } catch (err) {
         if (err.name === "TokenExpiredError") {

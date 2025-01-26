@@ -14,6 +14,11 @@ export default function PrimaryNavigation() {
                     <li>
                         <NavLink to="auth/login"> Log In </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="myquestions">
+                            My Questions
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

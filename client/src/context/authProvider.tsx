@@ -1,5 +1,4 @@
-import { ReactNode, useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import { ReactNode, useState } from "react";
 import { AuthContext } from "./authCtx";
 
 export const AuthProvider = ({
@@ -7,35 +6,31 @@ export const AuthProvider = ({
 }: {
     children: ReactNode;
 }) => {
-    const [userId, setUserId] = useState<{ userId: string } | null>(
-        null
-    );
+    const [isAuthed, setIsAuthed] = useState<boolean>(false);
 
-    useEffect(() => {
-        const token = document.cookie
-            .split("; ")
-            .find((row) => row.startsWith("token="));
+    const fetchAuthentication = async () => {
+        try {
+            const response = await fetch(
+                "http://localhost:8080/secure",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                }
+            );
 
-        if (token) {
-            try {
-                const payload = jwtDecode<{ userId: string }>(
-                    token.split("=")[1]
-                );
-
-                setUserId({ userId: payload.userId });
-            } catch (err) {
-                console.log(err);
-            }
+            setIsAuthed(response.ok);
+        } catch (err) {
+            console.log(err);
+            setIsAuthed(false);
         }
-    }, []);
-
-    const logout = () => {
-        document.cookie = "token=; Max-Age=0; path=/";
-        setUserId(null);
     };
 
+    fetchAuthentication();
+
     return (
-        <AuthContext.Provider value={{ userId, logout }}>
+        <AuthContext.Provider value={{ isAuthed }}>
             {children}
         </AuthContext.Provider>
     );

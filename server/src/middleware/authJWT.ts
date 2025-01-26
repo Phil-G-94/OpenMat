@@ -29,6 +29,10 @@ export const authJWT: RequestHandler = (
 
         req.userId = verifiedToken.userId;
 
+        res.status(200).json({
+            message: "Valid token. Access authorised.",
+        });
+
         next();
     } catch (err) {
         if (err.name === "TokenExpiredError") {

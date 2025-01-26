@@ -3,10 +3,11 @@ import express, { urlencoded, json } from "express";
 import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
-import { router as questionsRoute } from "./routes/questions.js";
+// import { router as questionsRoute } from "./routes/questions.js";
 import connectToDatabase from "./database/connection.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import { authJWT } from "./middleware/authJWT.js";
 // load env variables
 dotenv.config();
 // initialise express app
@@ -36,8 +37,8 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Hello World" });
 });
-app.use("/auth/", authRoutes);
-app.use(questionsRoute);
+app.get("/secure", authJWT);
+app.use("/auth", authRoutes);
 // error-handling middleware
 app.use((err, req, res, next) => {
     if (res.headersSent) {
