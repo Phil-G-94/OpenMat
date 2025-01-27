@@ -37,7 +37,9 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Hello World" });
 });
-app.get("/secure", authJWT);
+app.get("/secure", authJWT, (req, res) => {
+    res.status(200).json({ message: "Auth successful" });
+});
 app.use("/auth", authRoutes);
 app.use(questionsRoutes);
 // error-handling middleware
@@ -49,7 +51,7 @@ app.use((err, req, res, next) => {
     const message = err.message;
     const data = err instanceof CustomError ? err.data : null;
     res.status(status)
-        .set("Content-Type", "application.json")
+        .set("Content-Type", "application/json")
         .json({ message, data });
 });
 // start http server

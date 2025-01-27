@@ -54,7 +54,9 @@ app.get("/", (req: Request, res: Response) => {
     res.status(200).json({ message: "Hello World" });
 });
 
-app.get("/secure", authJWT);
+app.get("/secure", authJWT, (req: Request, res: Response) => {
+    res.status(200).json({ message: "Auth successful" });
+});
 
 app.use("/auth", authRoutes);
 
@@ -80,7 +82,7 @@ app.use(
         const data = err instanceof CustomError ? err.data : null;
 
         res.status(status)
-            .set("Content-Type", "application.json")
+            .set("Content-Type", "application/json")
             .json({ message, data });
     }
 );

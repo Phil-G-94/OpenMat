@@ -7,30 +7,43 @@ const router = Router();
 
 router.get(
     "/questions",
-    (req: Request, res: Response, next: NextFunction) => {
-        res.status(200).json({
-            message: "Questions successfully fetched.",
-        });
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const questions = await Question.find();
+
+            res.status(200).json({
+                message: "Questions successfully fetched.",
+                questions,
+            });
+        } catch (err) {
+            next(err);
+        }
     }
 );
 
 router.post(
     "/questions",
     authJWT,
-    (req: Request, res: Response, next: NextFunction) => {
+    async (req: Request, res: Response, next: NextFunction) => {
         const { post_title, post_body } = req.body;
 
-        const question = new Question({
-            title: post_title,
-            description: post_body,
-            authorId: req.userId,
-        });
+        try {
+            const user = await User.findById(req.userId);
 
-        question.save();
+            const question = new Question({
+                title: post_title,
+                description: post_body,
+                authorId: user,
+            });
 
-        res.status(200).json({
-            message: "Question successfully posted.",
-        });
+            await question.save();
+
+            res.status(200).json({
+                message: "Question successfully posted.",
+            });
+        } catch (err) {
+            next(err);
+        }
     }
 );
 export { router };
