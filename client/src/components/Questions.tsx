@@ -1,24 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import useFetch from "../hooks/useFetch";
+import { QuestionsResponse } from "../types/question";
+import QuestionCard from "./QuestionCard";
 
 export default function Questions() {
-    interface Question {
-        _id: string;
-        title: string;
-        description: string;
-        authorId: string;
-        answers: [string];
-        createdAt: string;
-        updatedAt: string;
-        __v: number;
-    }
-
-    interface QuestionsResponse {
-        message: string;
-        questions: Question[];
-    }
-
-    const [dataUpdateTrigger, setDataUpdateTrigger] = useState(false);
     const url = useMemo(() => "http://localhost:8080/questions", []);
     const defaultOptions = useMemo(
         () =>
@@ -32,27 +17,37 @@ export default function Questions() {
         []
     );
 
-    const [, { data, loading, error }] = useFetch<QuestionsResponse>(
-        url,
-        defaultOptions,
-        dataUpdateTrigger,
-        true
-    );
+    const [getData, { data, loading, error }] =
+        useFetch<QuestionsResponse>(
+            url,
+            defaultOptions,
+            undefined,
+            true
+        );
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setDataUpdateTrigger((prev) => !prev);
+            void getData();
         }, 300000);
 
         return () => clearInterval(interval);
-    }, [data]);
-
-    /* work on data, loading, error */
+    }, [getData]);
 
     return (
         <section>
-            <h2>The Questions component</h2>
-            <p>Where we display all the stored questions</p>
+            <h2 className="text-2xl text-center">Questions</h2>
+
+            {loading ? (
+                <p className="text-center">Loading...</p>
+            ) : (
+                <div>
+                    {data?.questions.map((question) => {
+                        return <QuestionCard question={question} />;
+                    })}
+                </div>
+            )}
+
+            {error && <p>{error}</p>}
         </section>
     );
 }
