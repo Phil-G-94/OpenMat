@@ -10,7 +10,6 @@ import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/HomePage";
 import QuestionForm from "./components/QuestionForm";
 import RequireAuth from "./pages/RequireAuth";
-// import RequireAuth from "./pages/RequireAuth";
 
 function App() {
     const router = createBrowserRouter(

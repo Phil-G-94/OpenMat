@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../model/user.js";
 const postSignup = async (req, res, next) => {
     try {
-        const { signup_username, signup_email, signup_password } =
-            req.body;
+        const { signup_username, signup_email, signup_password } = req.body;
         const existingUser = await User.findOne({
             email: signup_email,
         });
@@ -26,7 +25,8 @@ const postSignup = async (req, res, next) => {
         // save to DB
         user.save();
         res.status(200).json({ message: "Signup successful." });
-    } catch (err) {
+    }
+    catch (err) {
         next(err);
     }
 };
@@ -42,21 +42,14 @@ const postLogin = async (req, res, next) => {
             .json({ message: "User not found. Please sign up." });
     }
     // password comparison
-    const isValidPassword = await bcrypt.compare(
-        login_password,
-        existingUser.password
-    );
+    const isValidPassword = await bcrypt.compare(login_password, existingUser.password);
     if (!isValidPassword) {
         return res
             .status(400)
             .json({ message: "Incorrect credentials." });
     }
     // sign token
-    const token = jwt.sign(
-        { userId: existingUser._id.toString() },
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ userId: existingUser._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" });
     // set token through cookies
     res.cookie("token", token, {
         httpOnly: true,

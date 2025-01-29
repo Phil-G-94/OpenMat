@@ -42,7 +42,12 @@ export default function Questions() {
             ) : (
                 <div>
                     {data?.questions.map((question) => {
-                        return <QuestionCard question={question} />;
+                        return (
+                            <QuestionCard
+                                key={question._id}
+                                question={question}
+                            />
+                        );
                     })}
                 </div>
             )}

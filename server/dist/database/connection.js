@@ -9,7 +9,8 @@ const connectToDatabase = async (uri, options = {}) => {
     try {
         await mongoose.connect(uri, options);
         console.log("Successfully connected to the database.");
-    } catch (error) {
+    }
+    catch (error) {
         console.log("Error connecting to the database: ", error);
         process.exitCode = 1;
     }

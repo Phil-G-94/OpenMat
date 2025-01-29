@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import express, { urlencoded, json } from "express";
+import express, { urlencoded, json, } from "express";
 import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
@@ -14,21 +14,21 @@ dotenv.config();
 const app = express();
 // CORS middleware
 const allowedOrigins = ["http://localhost:5173"];
-app.use(
-    cors({
-        origin: (origin, callback) => {
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-        credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization"],
-    })
-);
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin)
+            return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+}));
 // middleware
 app.use(urlencoded({ extended: true }));
 app.use(json({}));
@@ -61,12 +61,10 @@ app.use((err, req, res, next) => {
     try {
         await connectToDatabase(dbUri);
         app.listen(process.env.PORT || 8080, () => {
-            console.log(
-                "Server is running on port",
-                process.env.PORT || 8080
-            );
+            console.log("Server is running on port", process.env.PORT || 8080);
         });
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         process.exitCode = 1;
     }
