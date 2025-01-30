@@ -7,14 +7,15 @@ const getQuestions = async (req, res, next) => {
             message: "Questions successfully fetched.",
             questions,
         });
-    }
-    catch (err) {
+    } catch (err) {
         next(err);
     }
 };
 const getQuestion = async (req, res, next) => {
     const questionId = req.params.questionId;
-    const question = await Question.findById(questionId);
+    const question = await Question.findById(questionId).populate(
+        "authorId"
+    );
     res.status(200).json({ question });
 };
 const postQuestion = async (req, res, next) => {
@@ -30,8 +31,7 @@ const postQuestion = async (req, res, next) => {
         res.status(200).json({
             message: "Question successfully posted.",
         });
-    }
-    catch (err) {
+    } catch (err) {
         next(err);
     }
 };

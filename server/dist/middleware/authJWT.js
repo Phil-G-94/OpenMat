@@ -8,16 +8,17 @@ export const authJWT = (req, res, next) => {
         throw new Error("JWT_Secret not set.");
     }
     try {
-        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const verifiedToken = jwt.verify(
+            token,
+            process.env.JWT_SECRET
+        );
         req.userId = verifiedToken.userId;
         next();
-    }
-    catch (err) {
+    } catch (err) {
         if (err.name === "TokenExpiredError") {
             err.statusCode = 401;
             err.message = "Session expired. Please log in again.";
-        }
-        else if (!err.statusCode) {
+        } else if (!err.statusCode) {
             err.statusCode = 500;
         }
         next(err);

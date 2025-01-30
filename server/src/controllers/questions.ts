@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Question } from "../model/question.js";
 import { User } from "../model/user.js";
+import { ObjectId } from "mongodb";
 
 const getQuestions = async (
     req: Request,
@@ -26,7 +27,9 @@ const getQuestion = async (
 ) => {
     const questionId = req.params.questionId;
 
-    const question = await Question.findById(questionId);
+    const question = await Question.findById(questionId).populate(
+        "authorId"
+    );
 
     res.status(200).json({ question });
 };

@@ -23,4 +23,13 @@ interface QuestionsResponse {
     questions: Question[];
 }
 
-export { Question, QuestionsResponse, PopulatedUser };
+interface QuestionResponse {
+    question: Question;
+}
+
+export {
+    Question,
+    QuestionsResponse,
+    QuestionResponse,
+    PopulatedUser,
+};
