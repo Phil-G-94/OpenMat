@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { QuestionResponse, PopulatedUser } from "../types/question";
 import useFetch from "../hooks/useFetch";
 import { useEffect, useMemo } from "react";
+import AddAnswer from "./AddAnswer";
 
 export default function QuestionDetail() {
     const { questionId } = useParams<{ questionId: string }>();
@@ -49,40 +50,43 @@ export default function QuestionDetail() {
     }, [getQuestion]);
 
     return (
-        <article>
-            {loading ? (
-                <p className="text-center">Loading...</p>
-            ) : (
-                <div className="flex flex-col items-center">
-                    <p className="text-2xl">{question?.title}</p>
-                    <p>{question?.description}</p>
-                    <div className="flex flex-row justify-evenly gap-6">
-                        <p>
-                            Posted on:{" "}
-                            {question?.createdAt
-                                ? new Date(
-                                      question?.createdAt
-                                  ).toLocaleString()
-                                : "Unknown date"}
-                        </p>
-                        <p>
-                            Posted by:{" "}
-                            {question?.authorId &&
-                            isUserPopulated(question?.authorId)
-                                ? question.authorId.username
-                                : "Unknown Author"}
-                        </p>
-                        <p>
-                            Rank:{" "}
-                            {question?.authorId &&
-                            isUserPopulated(question?.authorId)
-                                ? question.authorId.rank
-                                : "Unknown Author"}
-                        </p>
+        <>
+            <article>
+                {loading ? (
+                    <p className="text-center">Loading...</p>
+                ) : (
+                    <div className="flex flex-col items-center">
+                        <p className="text-2xl">{question?.title}</p>
+                        <p>{question?.description}</p>
+                        <div className="flex flex-row justify-evenly gap-6">
+                            <p>
+                                Posted on:{" "}
+                                {question?.createdAt
+                                    ? new Date(
+                                          question?.createdAt
+                                      ).toLocaleString()
+                                    : "Unknown date"}
+                            </p>
+                            <p>
+                                Posted by:{" "}
+                                {question?.authorId &&
+                                isUserPopulated(question?.authorId)
+                                    ? question.authorId.username
+                                    : "Unknown Author"}
+                            </p>
+                            <p>
+                                Rank:{" "}
+                                {question?.authorId &&
+                                isUserPopulated(question?.authorId)
+                                    ? question.authorId.rank
+                                    : "Unknown Author"}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            )}
-            {error && <p>{error}</p>}
-        </article>
+                )}
+                {error && <p>{error}</p>}
+            </article>
+            <AddAnswer />
+        </>
     );
 }
