@@ -10,6 +10,7 @@ import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
 import { router as questionsRoutes } from "./routes/questions.js";
+import { router as answersRoutes } from "./routes/answers.js";
 import connectToDatabase from "./database/connection.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -61,6 +62,8 @@ app.get("/secure", authJWT, (req: Request, res: Response) => {
 app.use("/auth", authRoutes);
 
 app.use(questionsRoutes);
+
+app.use(answersRoutes);
 
 // error-handling middleware
 app.use(

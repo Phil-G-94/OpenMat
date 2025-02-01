@@ -84,7 +84,10 @@ export default function QuestionDetail() {
                 )}
                 {error && <p>{error}</p>}
             </article>
-            <AddAnswer />
+            <AddAnswer
+                questionId={questionId}
+                authorId={question?.authorId}
+            />
         </>
     );
 }

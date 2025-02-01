@@ -4,8 +4,8 @@ interface IQuestion extends Document {
     title: string;
     description: string;
     // tags: [string];
-    authorId: ObjectId;
-    answers: [ObjectId];
+    authorId: mongoose.Types.ObjectId;
+    answers: mongoose.Types.ObjectId[];
 }
 
 const QuestionSchema = new Schema<IQuestion>(
@@ -18,7 +18,7 @@ const QuestionSchema = new Schema<IQuestion>(
             ref: "User",
             required: true,
         },
-        answers: { type: [Schema.Types.ObjectId] },
+        answers: { type: [Schema.Types.ObjectId], ref: "Answer" },
     },
     { timestamps: true }
 );

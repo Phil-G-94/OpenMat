@@ -13,10 +13,14 @@ const getQuestions = async (req, res, next) => {
 };
 const getQuestion = async (req, res, next) => {
     const questionId = req.params.questionId;
-    const question = await Question.findById(questionId).populate(
-        "authorId"
-    );
-    res.status(200).json({ question });
+    try {
+        const question = await Question.findById(questionId).populate(
+            "authorId"
+        );
+        res.status(200).json({ question });
+    } catch (err) {
+        next(err);
+    }
 };
 const postQuestion = async (req, res, next) => {
     const { post_title, post_body } = req.body;

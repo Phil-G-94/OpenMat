@@ -4,10 +4,8 @@ interface IAnswer extends Document {
     questionId: ObjectId;
     authorId: ObjectId;
     content: string;
-    upvotes: number;
-    downvotes: number;
-    // createdAt: Date;
-    // updatedAt: Date;
+    upvotes?: number;
+    downvotes?: number;
 }
 
 const AnswerSchema = new Schema<IAnswer>(

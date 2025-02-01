@@ -27,11 +27,15 @@ const getQuestion = async (
 ) => {
     const questionId = req.params.questionId;
 
-    const question = await Question.findById(questionId).populate(
-        "authorId"
-    );
+    try {
+        const question = await Question.findById(questionId).populate(
+            "authorId"
+        );
 
-    res.status(200).json({ question });
+        res.status(200).json({ question });
+    } catch (err) {
+        next(err);
+    }
 };
 
 const postQuestion = async (
