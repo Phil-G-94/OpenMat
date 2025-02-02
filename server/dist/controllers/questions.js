@@ -14,9 +14,9 @@ const getQuestions = async (req, res, next) => {
 const getQuestion = async (req, res, next) => {
     const questionId = req.params.questionId;
     try {
-        const question = await Question.findById(questionId).populate(
-            "authorId"
-        );
+        const question = await Question.findById(questionId)
+            .populate("authorId")
+            .populate("answers");
         res.status(200).json({ question });
     } catch (err) {
         next(err);

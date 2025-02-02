@@ -9,7 +9,7 @@ const QuestionSchema = new Schema(
             ref: "User",
             required: true,
         },
-        answers: { type: [Schema.Types.ObjectId] },
+        answers: { type: [Schema.Types.ObjectId], ref: "Answer" },
     },
     { timestamps: true }
 );

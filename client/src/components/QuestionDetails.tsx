@@ -33,6 +33,8 @@ export default function QuestionDetail() {
 
     const question = data?.question;
 
+    const answers = data?.question.answers;
+
     const isUserPopulated = (
         author: string | PopulatedUser
     ): author is PopulatedUser => {

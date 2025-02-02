@@ -18,6 +18,14 @@ interface Question {
     __v: number;
 }
 
+interface Answer {
+    questionId: ObjectId;
+    authorId: ObjectId;
+    content: string;
+    upvotes?: number;
+    downvotes?: number;
+}
+
 interface QuestionsResponse {
     message: string;
     questions: Question[];
@@ -25,6 +33,7 @@ interface QuestionsResponse {
 
 interface QuestionResponse {
     question: Question;
+    answer: Answer[];
 }
 
 export {

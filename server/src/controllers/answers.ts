@@ -3,19 +3,22 @@ import { Question } from "../model/question.js";
 import { Answer } from "../model/answer.js";
 import mongoose from "mongoose";
 
-const getAnswers = (
+const getAnswers = async (
     req: Request,
     res: Response,
     next: NextFunction
-) => {};
+) => {
+    try {
+    } catch (err) {
+        next(err);
+    }
+};
 
 const postAnswer = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const data = req.body;
-
     const questionId = req.body.questionId;
     const authorId = req.body.authorId;
     const content = req.body.content;
