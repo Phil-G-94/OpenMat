@@ -16,7 +16,10 @@ const getQuestion = async (req, res, next) => {
     try {
         const question = await Question.findById(questionId)
             .populate("authorId")
-            .populate("answers");
+            .populate({
+                path: "answers",
+                populate: { path: "authorId" },
+            });
         res.status(200).json({ question });
     } catch (err) {
         next(err);

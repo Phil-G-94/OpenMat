@@ -9,8 +9,7 @@ import Signup from "./components/Signup";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/HomePage";
 import QuestionForm from "./components/QuestionForm";
-
-import QuestionDetail from "./components/QuestionDetails";
+import Thread from "./components/Thread";
 
 function App() {
     const router = createBrowserRouter(
@@ -26,7 +25,7 @@ function App() {
                 ></Route>
                 <Route
                     path="questions/:questionId"
-                    element={<QuestionDetail />}
+                    element={<Thread />}
                 />
             </Route>
         )

@@ -3,17 +3,6 @@ import { Question } from "../model/question.js";
 import { Answer } from "../model/answer.js";
 import mongoose from "mongoose";
 
-const getAnswers = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    try {
-    } catch (err) {
-        next(err);
-    }
-};
-
 const postAnswer = async (
     req: Request,
     res: Response,
@@ -50,4 +39,4 @@ const postAnswer = async (
     }
 };
 
-export { getAnswers, postAnswer };
+export { postAnswer };

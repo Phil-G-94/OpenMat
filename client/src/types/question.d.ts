@@ -12,13 +12,14 @@ interface Question {
     title: string;
     description: string;
     authorId: string | PopulatedUser;
-    answers: [string];
+    answers: [Answer];
     createdAt: string;
     updatedAt: string;
     __v: number;
 }
 
 interface Answer {
+    _id: ObjectId;
     questionId: ObjectId;
     authorId: ObjectId;
     content: string;
@@ -37,8 +38,9 @@ interface QuestionResponse {
 }
 
 export {
+    PopulatedUser,
     Question,
+    Answer,
     QuestionsResponse,
     QuestionResponse,
-    PopulatedUser,
 };

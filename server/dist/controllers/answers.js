@@ -1,11 +1,5 @@
 import { Question } from "../model/question.js";
 import { Answer } from "../model/answer.js";
-const getAnswers = async (req, res, next) => {
-    try {
-    } catch (err) {
-        next(err);
-    }
-};
 const postAnswer = async (req, res, next) => {
     const questionId = req.body.questionId;
     const authorId = req.body.authorId;
@@ -29,4 +23,4 @@ const postAnswer = async (req, res, next) => {
         next(err);
     }
 };
-export { getAnswers, postAnswer };
+export { postAnswer };

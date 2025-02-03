@@ -1,56 +1,22 @@
-import { useParams } from "react-router";
-import { QuestionResponse, PopulatedUser } from "../types/question";
-import useFetch from "../hooks/useFetch";
-import { useEffect, useMemo } from "react";
-import AddAnswer from "./AddAnswer";
+import { Question, PopulatedUser } from "../types/question";
 
-export default function QuestionDetail() {
-    const { questionId } = useParams<{ questionId: string }>();
-
-    const url = useMemo(
-        () => `http://localhost:8080/questions/${questionId}`,
-        [questionId]
-    );
-    const defaultOptions = useMemo(
-        () =>
-            ({
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            }) as RequestInit,
-        []
-    );
-
-    const [getQuestion, { data, loading, error }] =
-        useFetch<QuestionResponse>(
-            url,
-            defaultOptions,
-            undefined,
-            true
-        );
-
-    const question = data?.question;
-
-    const answers = data?.question.answers;
-
+export default function QuestionDetail({
+    question,
+    error,
+    loading,
+}: {
+    question: Question | undefined;
+    error: string | null;
+    loading: boolean;
+}) {
     const isUserPopulated = (
         author: string | PopulatedUser
     ): author is PopulatedUser => {
         return typeof author !== "string" && "username" in author;
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            void getQuestion();
-        }, 300000);
-
-        return () => clearInterval(interval);
-    }, [getQuestion]);
-
     return (
-        <>
+        <section>
             <article>
                 {loading ? (
                     <p className="text-center">Loading...</p>
@@ -86,10 +52,6 @@ export default function QuestionDetail() {
                 )}
                 {error && <p>{error}</p>}
             </article>
-            <AddAnswer
-                questionId={questionId}
-                authorId={question?.authorId}
-            />
-        </>
+        </section>
     );
 }

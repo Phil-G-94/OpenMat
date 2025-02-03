@@ -51,17 +51,18 @@ export default function AddAnswer({
     };
 
     return (
-        <section>
+        <section className="w-full">
             {!error && (
                 <form
                     ref={formRef}
                     onSubmit={onSubmitHandler}
                     action=""
                     id="post_answer_form"
-                    className="w-full max-w-lg p-4 border border-gray-300 rounded-lg shadow-sm bg-white"
+                    className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white"
                 >
                     <label htmlFor="answer"></label>
                     <TextareaAutosize
+                        id="answer"
                         name="answer"
                         className="w-full p-2 text-gray-800 border-none focus:outline-none resize-none font-mono"
                         placeholder="Post an answer..."
