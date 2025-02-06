@@ -36,7 +36,7 @@ app.use(json({}));
 app.use(cookieParser());
 // routes
 app.get("/", (req, res) => {
-    res.status(200).json({ message: "Hello World" });
+    res.status(200);
 });
 app.get("/secure", authJWT, (req, res) => {
     res.status(200).json({ message: "Auth successful" });

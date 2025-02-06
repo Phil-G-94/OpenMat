@@ -23,4 +23,40 @@ const postAnswer = async (req, res, next) => {
         next(err);
     }
 };
-export { postAnswer };
+const patchUpvotes = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const answer = await Answer.findByIdAndUpdate(
+            id,
+            { $inc: { upvotes: 1 } },
+            { new: true }
+        );
+        if (!answer) {
+            res.status(404).json({ message: "Answer not found" });
+            return;
+        }
+        const currentUpvotes = answer.upvotes;
+        res.status(200).json({ upvotes: currentUpvotes });
+    } catch (err) {
+        next(err);
+    }
+};
+const patchDownvotes = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const answer = await Answer.findByIdAndUpdate(
+            id,
+            { $inc: { downvotes: 1 } },
+            { new: true }
+        );
+        if (!answer) {
+            res.status(404).json({ message: "Answer not found" });
+            return;
+        }
+        const currentDownvotes = answer.downvotes;
+        res.status(200).json({ downvotes: currentDownvotes });
+    } catch (err) {
+        next(err);
+    }
+};
+export { postAnswer, patchUpvotes, patchDownvotes };
