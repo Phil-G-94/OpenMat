@@ -34,7 +34,10 @@ export default function Downvote({
      * doesn't current render `data` from useFetch
      * instead it optimistically updates the UI, assuming successful increment
      * if !loading and !error
+     *
      * doesn't update the page "live" - refresh needed.
+     * unexpected behaviour: when currentDownvote value > 0; it will increment as expected, i.e "live"
+     * delay otherwise - probably because of the way I set up the useEffect() call in Thread.tsx
      */
 
     return (
