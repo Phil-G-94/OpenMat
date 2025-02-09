@@ -58,28 +58,34 @@ export default function AddAnswer({
                     onSubmit={onSubmitHandler}
                     action=""
                     id="post_answer_form"
-                    className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white"
+                    className="border-2 p-4 border-onyx rounded-lg shadow-sm bg-inherit"
                 >
                     <label htmlFor="answer"></label>
                     <TextareaAutosize
                         id="answer"
                         name="answer"
-                        className="w-full p-2 text-gray-800 border-none focus:outline-none resize-none font-mono"
                         placeholder="Post an answer..."
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         minRows={2}
                         maxRows={10}
+                        className="w-full border-none focus:outline-none resize-none font-mono bg-inherit placeholder-onyx"
+                        required
                     />
                     <span className="flex flex-row gap-3 justify-end">
                         <button
                             onClick={onCancelHandler}
                             type="reset"
                             form="post_answer_form"
+                            className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1"
                         >
                             Cancel
                         </button>
-                        <button type="submit" form="post_answer_form">
+                        <button
+                            type="submit"
+                            form="post_answer_form"
+                            className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1"
+                        >
                             Post Answer
                         </button>
                     </span>

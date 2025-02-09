@@ -1,7 +1,10 @@
 import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import TextareaAutosize from "react-textarea-autosize";
 import useFetch from "../hooks/useFetch";
 
 export default function QuestionForm() {
+    const navigate = useNavigate();
     const [postQuestionForm, { loading, error }] = useFetch<{
         title: string;
         body: string;
@@ -38,6 +41,8 @@ export default function QuestionForm() {
         });
 
         form.reset();
+
+        navigate("/");
     };
 
     return (
@@ -59,6 +64,7 @@ export default function QuestionForm() {
                     type="text"
                     name="post_title"
                     id="post_title"
+                    required
                 />
                 <label
                     className="block text-gray-700 text-sm font-bold mb-2"
@@ -66,12 +72,18 @@ export default function QuestionForm() {
                 >
                     Body
                 </label>
-                <textarea
-                    className="shadow appearance-none border rounded w-72 h-56 text-wrap"
-                    name="post_body"
+
+                <TextareaAutosize
                     id="post_body"
+                    name="post_body"
+                    minRows={10}
+                    maxRows={20}
+                    className="w-full border-none focus:outline-none resize-none placeholder-onyx"
+                    required
                 />
-                <button>{loading ? "Posting" : "Post"}</button>
+                <button className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1">
+                    {loading ? "Posting" : "Post"}
+                </button>
             </form>
 
             {error && <p>{error}</p>}

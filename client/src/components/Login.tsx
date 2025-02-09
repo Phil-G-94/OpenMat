@@ -1,7 +1,10 @@
 import { FormEvent } from "react";
 import useFetch from "../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
+
     const [postLoginUser, { loading, error }] = useFetch<{
         username: string;
         password: string;
@@ -35,6 +38,8 @@ export default function Login() {
         await postLoginUser({
             body: JSON.stringify(formDataObject),
         });
+
+        navigate("/");
     };
 
     return (
@@ -58,6 +63,7 @@ export default function Login() {
                     name="login_username"
                     id="login_username"
                     autoComplete="username"
+                    required
                 />
                 <label
                     className="block text-gray-700 text-sm font-bold mb-2"
@@ -71,8 +77,9 @@ export default function Login() {
                     name="login_password"
                     id="login_password"
                     autoComplete="current-password"
+                    required
                 />
-                <button className="text-lg">
+                <button className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1">
                     {loading ? "Logging in" : "Log in"}
                 </button>
             </form>

@@ -56,6 +56,7 @@ export default function Signup() {
                     name="signup_username"
                     id="signup_username"
                     autoComplete="username"
+                    required
                 />
                 <label
                     className="block text-gray-700 text-sm font-bold mb-2"
@@ -69,6 +70,7 @@ export default function Signup() {
                     name="signup_email"
                     id="signup_email"
                     autoComplete="email"
+                    required
                 />
                 <label
                     className="block text-gray-700 text-sm font-bold mb-2"
@@ -82,8 +84,9 @@ export default function Signup() {
                     name="signup_password"
                     id="signup_password"
                     autoComplete="new-password"
+                    required
                 />
-                <button className="text-lg">
+                <button className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1">
                     {loading ? `Signing up` : `Sign up`}
                 </button>
             </form>
