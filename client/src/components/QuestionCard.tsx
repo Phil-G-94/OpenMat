@@ -8,7 +8,7 @@ export default function QuestionCard({
 }) {
     return (
         <Link to={`/questions/${question._id}`}>
-            <article>
+            <article className="border-2 border-y-yellow border-x-0">
                 <p className="text-xl">{question.title}</p>
                 <p>{question.description}</p>
                 <p>

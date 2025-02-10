@@ -8,7 +8,7 @@ export default function Answers({
     answers: [Answer] | undefined;
 }) {
     return (
-        <section>
+        <section className="flex flex-col gap-4">
             {answers?.map((answer) => {
                 return (
                     <article

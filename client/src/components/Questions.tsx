@@ -34,13 +34,13 @@ export default function Questions() {
     }, [getData]);
 
     return (
-        <section>
+        <section className="flex flex-col gap-4">
             <h2 className="text-2xl text-center">Questions</h2>
 
             {loading ? (
                 <p className="text-center">Loading...</p>
             ) : (
-                <div>
+                <div className="flex flex-col gap-4">
                     {data?.questions.map((question) => {
                         return (
                             <QuestionCard

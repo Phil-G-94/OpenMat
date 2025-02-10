@@ -51,7 +51,7 @@ export default function Thread() {
                     loading={loading}
                 />
             </div>
-            <div className="col-span-full w-full">
+            <div className="col-span-full w-1/2">
                 <AddAnswer
                     questionId={questionId}
                     authorId={question?.authorId}

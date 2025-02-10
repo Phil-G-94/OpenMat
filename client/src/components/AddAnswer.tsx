@@ -51,7 +51,7 @@ export default function AddAnswer({
     };
 
     return (
-        <section className="w-full">
+        <section>
             {!error && (
                 <form
                     ref={formRef}

@@ -9,12 +9,7 @@
 
 ### Styling
 
-1. Determine color palette / add custom color variables using twcss
-2. Tweak layout
+1. ~~Determine color palette / add custom color variables using twcss~~
+2. ~~Tweak layout~~
 3. Install and add svg icons to UI
-
-## Completed
-
-### Logic
-
-### Styling
+4. Nav styling - underline on hover / active link
