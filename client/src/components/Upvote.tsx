@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IconArrowBigUp } from "@tabler/icons-react";
 import useFetch from "../hooks/useFetch";
 
 export default function Upvote({
@@ -41,7 +42,9 @@ export default function Upvote({
 
     return (
         <span className="flex flex-row">
-            <button onClick={handleUpvote}>👍🏼</button>
+            <button onClick={handleUpvote}>
+                <IconArrowBigUp className="hover:fill-bittersweet hover:animate-bounce" />
+            </button>
             <p>{currentUpvotes}</p>
         </span>
     );

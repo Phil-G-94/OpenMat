@@ -12,7 +12,7 @@ export default function Answers({
             {answers?.map((answer) => {
                 return (
                     <article
-                        className="border-2 border-black rounded-md p-4"
+                        className="border-2 border-black rounded-md p-4 flex flex-col gap-4"
                         key={answer._id}
                     >
                         <span className="flex flex-row gap-2">

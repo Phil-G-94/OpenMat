@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useFetch from "../hooks/useFetch";
+import { IconArrowBigDown } from "@tabler/icons-react";
 
 export default function Downvote({
     downvotes,
@@ -42,7 +43,10 @@ export default function Downvote({
 
     return (
         <span className="flex flex-row">
-            <button onClick={handleDownvote}>👎🏼</button>
+            <button onClick={handleDownvote}>
+                {" "}
+                <IconArrowBigDown className="hover:fill-bittersweet hover:animate-bounce" />
+            </button>
             <p>{currentDownvotes}</p>
         </span>
     );
