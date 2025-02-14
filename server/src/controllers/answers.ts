@@ -39,6 +39,36 @@ const postAnswer = async (
     }
 };
 
+const postAIAnswer = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { question } = req.body;
+
+        const response = await fetch(
+            `http://${process.env.OLLAMA_VM_IP}:${process.env.OLLAMA_VM_PORT}/api/generate`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    model: "mistral",
+                    prompt: `Provide a concise, helpful answer to the following question:\n\n"${question}"`,
+                }),
+            }
+        );
+
+        const data = await response.json();
+
+        res.json({ aiAnswer: data.response });
+    } catch (err) {
+        next(err);
+    }
+};
+
 const patchUpvotes = async (
     req: Request,
     res: Response,
@@ -93,4 +123,4 @@ const patchDownvotes = async (
     }
 };
 
-export { postAnswer, patchUpvotes, patchDownvotes };
+export { postAnswer, postAIAnswer, patchUpvotes, patchDownvotes };
