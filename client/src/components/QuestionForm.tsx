@@ -1,10 +1,11 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import useFetch from "../hooks/useFetch";
 
 export default function QuestionForm() {
     const navigate = useNavigate();
+    const [text, setText] = useState("");
     const [postQuestionForm, { loading, error }] = useFetch<{
         title: string;
         body: string;
@@ -76,6 +77,8 @@ export default function QuestionForm() {
                 <TextareaAutosize
                     id="post_body"
                     name="post_body"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
                     minRows={10}
                     maxRows={20}
                     className="w-full border-none focus:outline-none resize-none placeholder-onyx"

@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 interface AuthContextType {
     isAuthed: boolean | null;
-    // logout: () => void;
+    fetchAuthentication: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(

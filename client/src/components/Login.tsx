@@ -1,9 +1,11 @@
 import { FormEvent } from "react";
 import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function Login() {
     const navigate = useNavigate();
+    const { fetchAuthentication } = useAuth();
 
     const [postLoginUser, { loading, error }] = useFetch<{
         username: string;
@@ -38,6 +40,8 @@ export default function Login() {
         await postLoginUser({
             body: JSON.stringify(formDataObject),
         });
+
+        await fetchAuthentication();
 
         navigate("/");
     };

@@ -1,5 +1,5 @@
 import TextareaAutosize from "react-textarea-autosize";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { PopulatedUser } from "../types/question";
 
@@ -11,7 +11,6 @@ export default function AddAnswer({
     authorId: string | PopulatedUser | undefined;
 }) {
     const [text, setText] = useState("");
-    const formRef = useRef<HTMLFormElement>(null);
 
     const [postAnswerForm, { error }] = useFetch<{
         body: string;
@@ -54,7 +53,6 @@ export default function AddAnswer({
         <section>
             {!error && (
                 <form
-                    ref={formRef}
                     onSubmit={onSubmitHandler}
                     action=""
                     id="post_answer_form"

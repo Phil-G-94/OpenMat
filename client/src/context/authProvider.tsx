@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { AuthContext } from "./authCtx";
 
 export const AuthProvider = ({
@@ -20,17 +20,25 @@ export const AuthProvider = ({
                 }
             );
 
-            setIsAuthed(response.ok);
+            if (response.ok) {
+                setIsAuthed(true);
+            } else {
+                setIsAuthed(false);
+            }
         } catch (err) {
             console.log(err);
             setIsAuthed(false);
         }
     };
 
-    fetchAuthentication();
+    useEffect(() => {
+        fetchAuthentication();
+    }, []);
 
     return (
-        <AuthContext.Provider value={{ isAuthed }}>
+        <AuthContext.Provider
+            value={{ isAuthed, fetchAuthentication }}
+        >
             {children}
         </AuthContext.Provider>
     );
