@@ -4,8 +4,10 @@ import Downvote from "./Downvote";
 
 export default function Answers({
     answers,
+    refreshAnswers,
 }: {
     answers: [Answer] | undefined;
+    refreshAnswers: () => void;
 }) {
     return (
         <section className="flex flex-col gap-4">
@@ -28,10 +30,12 @@ export default function Answers({
                             <Upvote
                                 upvotes={answer.upvotes}
                                 id={answer._id}
+                                onUpvoteSuccess={refreshAnswers}
                             />
                             <Downvote
                                 downvotes={answer.downvotes}
                                 id={answer._id}
+                                onDownvoteSuccess={refreshAnswers}
                             />
                         </div>
                     </article>

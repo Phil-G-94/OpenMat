@@ -25,16 +25,14 @@ export default function Thread() {
         []
     );
 
-    const [getQuestion, { data, loading, error }] =
-        useFetch<QuestionResponse>(url, defaultOptions, true, true);
+    const [getQuestion, { data, loading, error }, refreshAnswers] =
+        useFetch<QuestionResponse>(url, defaultOptions, true);
 
     const question = data?.question;
 
     const answers = data?.question.answers;
 
     useEffect(() => {
-        /* needs more work */
-
         const interval = setInterval(() => {
             void getQuestion();
         }, 60000);
@@ -59,7 +57,10 @@ export default function Thread() {
             </div>
 
             <div className="col-span-full w-1/2">
-                <Answers answers={answers} />
+                <Answers
+                    answers={answers}
+                    refreshAnswers={refreshAnswers}
+                />
             </div>
         </div>
     );

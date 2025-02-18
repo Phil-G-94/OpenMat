@@ -18,12 +18,7 @@ export default function Questions() {
     );
 
     const [getData, { data, loading, error }] =
-        useFetch<QuestionsResponse>(
-            url,
-            defaultOptions,
-            undefined,
-            true
-        );
+        useFetch<QuestionsResponse>(url, defaultOptions, true);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -32,6 +27,8 @@ export default function Questions() {
 
         return () => clearInterval(interval);
     }, [getData]);
+
+    console.log(data);
 
     return (
         <section className="flex flex-col gap-4">

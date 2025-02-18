@@ -6,9 +6,6 @@ export default function RequireAuth() {
     const { isAuthed } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-
-    console.log(isAuthed);
-
     useEffect(() => {
         if (!isAuthed) {
             navigate("/auth/login");

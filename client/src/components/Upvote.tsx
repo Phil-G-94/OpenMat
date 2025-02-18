@@ -5,15 +5,17 @@ import useFetch from "../hooks/useFetch";
 export default function Upvote({
     upvotes,
     id,
+    onUpvoteSuccess,
 }: {
     upvotes: number | undefined;
     id: string;
+    onUpvoteSuccess: () => void;
 }) {
     const [currentUpvotes, setCurrentUpvotes] = useState<
         number | undefined
     >(upvotes);
 
-    const [triggerUpvote, { loading, error }] = useFetch<{
+    const [triggerUpvote, { data, loading, error }] = useFetch<{
         upvotes: number;
     }>(`http://localhost:8080/answers/${id}/upvotes`, {
         method: "PATCH",
@@ -23,22 +25,11 @@ export default function Upvote({
     const handleUpvote = async () => {
         await triggerUpvote();
 
-        if (!loading && !error) {
-            setCurrentUpvotes((prev) => (prev ? prev + 1 : prev));
+        if (!loading && !error && data?.upvotes !== undefined) {
+            setCurrentUpvotes(data.upvotes); // use latest count
+            onUpvoteSuccess?.(); // refresh answer if needed
         }
     };
-
-    /**
-     * Note:
-     * works but...
-     * doesn't current render `data` from useFetch
-     * instead it optimistically updates the UI, assuming successful increment
-     * if !loading and !error.
-     *
-     * doesn't update the page "live" - refresh needed.
-     * unexpected behaviour: when currentDownvote value > 0; it will increment as expected, i.e "live"
-     * delay otherwise - probably because of the way I set up the useEffect() call in Thread.tsx
-     */
 
     return (
         <span className="flex flex-row">

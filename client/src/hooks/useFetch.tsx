@@ -11,13 +11,17 @@ type FetchOptions = RequestInit; // alias for type used by Fetch API
 export default function useFetch<T>(
     url: string,
     defaultOptions?: FetchOptions,
-    dataUpdateTrigger?: boolean,
     autoFetch = false // control automatic fetching
-): [(fetchOptions?: FetchOptions) => Promise<void>, FetchState<T>] {
+): [
+    (fetchOptions?: FetchOptions) => Promise<void>,
+    FetchState<T>,
+    () => void,
+] {
     // state(s)
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [fetchTrigger, setFetchTrigger] = useState(0); // track re-fetch request
 
     // generic function using the Fetch API
 
@@ -53,10 +57,12 @@ export default function useFetch<T>(
     // Automatically trigger fetch if autoFetch is true
 
     useEffect(() => {
-        if (autoFetch) {
+        if (autoFetch || fetchTrigger > 0) {
             void fetchData();
         }
-    }, [autoFetch, fetchData, dataUpdateTrigger]);
+    }, [autoFetch, fetchData, fetchTrigger]);
 
-    return [fetchData, { data, loading, error }];
+    const triggerFetch = () => setFetchTrigger((prev) => prev + 1);
+
+    return [fetchData, { data, loading, error }, triggerFetch];
 }
