@@ -7,6 +7,7 @@ export const AuthProvider = ({
     children: ReactNode;
 }) => {
     const [isAuthed, setIsAuthed] = useState<boolean>(false);
+    const [loadingAuth, setLoadingAuth] = useState<boolean>(true);
 
     const fetchAuthentication = async () => {
         try {
@@ -28,6 +29,8 @@ export const AuthProvider = ({
         } catch (err) {
             console.log(err);
             setIsAuthed(false);
+        } finally {
+            setLoadingAuth(false);
         }
     };
 
@@ -37,7 +40,7 @@ export const AuthProvider = ({
 
     return (
         <AuthContext.Provider
-            value={{ isAuthed, fetchAuthentication }}
+            value={{ isAuthed, fetchAuthentication, loadingAuth }}
         >
             {children}
         </AuthContext.Provider>

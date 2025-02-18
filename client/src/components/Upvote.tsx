@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconArrowBigUp } from "@tabler/icons-react";
 import useFetch from "../hooks/useFetch";
 
@@ -15,20 +15,22 @@ export default function Upvote({
         number | undefined
     >(upvotes);
 
-    const [triggerUpvote, { data, loading, error }] = useFetch<{
+    const [triggerUpvote, { data }] = useFetch<{
         upvotes: number;
     }>(`http://localhost:8080/answers/${id}/upvotes`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
     });
 
+    useEffect(() => {
+        if (data?.upvotes !== undefined) {
+            setCurrentUpvotes(data.upvotes);
+        }
+    }, [data]);
+
     const handleUpvote = async () => {
         await triggerUpvote();
-
-        if (!loading && !error && data?.upvotes !== undefined) {
-            setCurrentUpvotes(data.upvotes); // use latest count
-            onUpvoteSuccess?.(); // refresh answer if needed
-        }
+        onUpvoteSuccess?.(); // refresh answer if needed
     };
 
     return (

@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { QuestionResponse } from "../types/question";
 import useFetch from "../hooks/useFetch";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import AddAnswer from "./AddAnswer";
 import Answers from "./Answers";
 import QuestionDetail from "./QuestionDetail";
@@ -25,20 +25,12 @@ export default function Thread() {
         []
     );
 
-    const [getQuestion, { data, loading, error }, refreshAnswers] =
+    const [, { data, loading, error }, refreshAnswers] =
         useFetch<QuestionResponse>(url, defaultOptions, true);
 
     const question = data?.question;
 
     const answers = data?.question.answers;
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            void getQuestion();
-        }, 60000);
-
-        return () => clearInterval(interval);
-    }, [getQuestion, data]);
 
     return (
         <div className="grid grid-cols-2 justify-items-center gap-6">
@@ -53,6 +45,7 @@ export default function Thread() {
                 <AddAnswer
                     questionId={questionId}
                     authorId={question?.authorId}
+                    refreshAnswers={refreshAnswers}
                 />
             </div>
 

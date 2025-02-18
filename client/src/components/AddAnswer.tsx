@@ -6,26 +6,23 @@ import { PopulatedUser } from "../types/question";
 export default function AddAnswer({
     questionId,
     authorId,
+    refreshAnswers,
 }: {
     questionId: string | undefined;
     authorId: string | PopulatedUser | undefined;
+    refreshAnswers: () => void;
 }) {
     const [text, setText] = useState("");
 
     const [postAnswerForm, { error }] = useFetch<{
         body: string;
-    }>(
-        "http://localhost:8080/answers",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
+    }>("http://localhost:8080/answers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
         },
-        false,
-        false
-    );
+        credentials: "include",
+    });
 
     const onSubmitHandler = async (
         event: FormEvent<HTMLFormElement>
@@ -41,6 +38,8 @@ export default function AddAnswer({
         await postAnswerForm({
             body: JSON.stringify(answer),
         });
+
+        refreshAnswers?.();
 
         setText("");
     };

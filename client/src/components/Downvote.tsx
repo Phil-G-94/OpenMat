@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { IconArrowBigDown } from "@tabler/icons-react";
 
@@ -15,7 +15,7 @@ export default function Downvote({
         number | undefined
     >(downvotes);
 
-    const [triggerDownvote, { data, loading, error }] = useFetch<{
+    const [triggerDownvote, { data }] = useFetch<{
         downvotes: number;
     }>(`http://localhost:8080/answers/${id}/downvotes`, {
         method: "PATCH",
@@ -24,16 +24,17 @@ export default function Downvote({
         },
     });
 
+    useEffect(() => {
+        if (data?.downvotes !== undefined) {
+            setCurrentDownvotes(data.downvotes);
+        }
+    }, [data]);
+
     const handleDownvote = async () => {
         await triggerDownvote();
-
-        if (!loading && !error && data?.downvotes !== undefined) {
-            setCurrentDownvotes(data.downvotes); // use latest count
-            onDownvoteSuccess?.(); // refresh answers if needed
-        }
+        onDownvoteSuccess?.(); // refresh answers if needed
     };
 
-    console.log(currentDownvotes);
     return (
         <span className="flex flex-row">
             <button onClick={handleDownvote}>
