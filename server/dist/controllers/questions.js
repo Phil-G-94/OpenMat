@@ -1,11 +1,21 @@
 import { Question } from "../model/question.js";
 import { User } from "../model/user.js";
 const getQuestions = async (req, res, next) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 4;
+    const skip = (page - 1) * limit;
     try {
-        const questions = await Question.find().populate("authorId");
+        const questions = await Question.find()
+            .populate("authorId")
+            .skip(skip)
+            .limit(limit);
+        const totalQuestions = await Question.countDocuments();
         res.status(200).json({
             message: "Questions successfully fetched.",
             questions,
+            totalPages: Math.ceil(totalQuestions / limit),
+            page,
+            limit,
         });
     } catch (err) {
         next(err);

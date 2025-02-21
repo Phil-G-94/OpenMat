@@ -1,19 +1,30 @@
 import { Request, Response, NextFunction } from "express";
 import { Question } from "../model/question.js";
 import { User } from "../model/user.js";
-import { ObjectId } from "mongodb";
 
 const getQuestions = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 4;
+    const skip = (page - 1) * limit;
+
     try {
-        const questions = await Question.find().populate("authorId");
+        const questions = await Question.find()
+            .populate("authorId")
+            .skip(skip)
+            .limit(limit);
+
+        const totalQuestions = await Question.countDocuments();
 
         res.status(200).json({
             message: "Questions successfully fetched.",
             questions,
+            totalPages: Math.ceil(totalQuestions / limit),
+            page,
+            limit,
         });
     } catch (err) {
         next(err);

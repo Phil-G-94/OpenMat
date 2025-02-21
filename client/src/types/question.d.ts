@@ -30,6 +30,9 @@ interface Answer {
 interface QuestionsResponse {
     message: string;
     questions: Question[];
+    limit: number;
+    page: number;
+    totalPages: number;
 }
 
 interface QuestionResponse {
