@@ -61,23 +61,26 @@ export default function Questions() {
                     </div>
                 )}
             </section>
-            <div className="flex flex-row gap-6 justify-center">
-                <button
-                    disabled={page === 1}
-                    onClick={() => setPage((prev) => prev - 1)}
-                >
-                    ⬅ Prev
-                </button>
-                <span>
-                    Page {page} of {totalPages}
-                </span>
-                <button
-                    disabled={page === totalPages}
-                    onClick={() => setPage((prev) => prev + 1)}
-                >
-                    Next ➡
-                </button>
-            </div>
+
+            {!loading && (
+                <div className="flex flex-row gap-6 justify-center">
+                    <button
+                        disabled={page === 1}
+                        onClick={() => setPage((prev) => prev - 1)}
+                    >
+                        ⬅ Prev
+                    </button>
+                    <span>
+                        Page {page} of {totalPages}
+                    </span>
+                    <button
+                        disabled={page === totalPages}
+                        onClick={() => setPage((prev) => prev + 1)}
+                    >
+                        Next ➡
+                    </button>
+                </div>
+            )}
 
             {error && <p>{error}</p>}
         </>
