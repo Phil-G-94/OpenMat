@@ -17,7 +17,7 @@ export default function QuestionDetail({
 
     return (
         <section>
-            <article>
+            <article className="w-full">
                 {loading ? (
                     <p className="text-center">Loading...</p>
                 ) : (

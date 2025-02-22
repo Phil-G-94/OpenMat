@@ -49,7 +49,7 @@ export default function AddAnswer({
     };
 
     return (
-        <section>
+        <section className="w-full">
             {!error && (
                 <form
                     onSubmit={onSubmitHandler}
@@ -69,19 +69,19 @@ export default function AddAnswer({
                         className="w-full border-none focus:outline-none resize-none font-mono bg-inherit placeholder-onyx"
                         required
                     />
-                    <span className="flex flex-row gap-3 justify-end">
+                    <span className="flex flex-row md:gap-3 justify-center md:justify-end">
                         <button
                             onClick={onCancelHandler}
                             type="reset"
                             form="post_answer_form"
-                            className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1"
+                            className="rounded-lg bg-yellow border-2 border-bittersweet text-onyx sm:pl-1 sm:pr-1 sm:pt-1 sm:pb-1 md:pl-2 md:pr-2 md:pt-1 md:pb-1"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             form="post_answer_form"
-                            className="rounded-full bg-yellow border-2 border-bittersweet text-onyx pl-2 pr-2 pt-1 pb-1"
+                            className="rounded-lg bg-yellow border-2 border-bittersweet text-onyx sm:pl-1 sm:pr-1 sm:pt-1 sm:pb-1 md:pl-2 md:pr-2 md:pt-1 md:pb-1"
                         >
                             Post Answer
                         </button>

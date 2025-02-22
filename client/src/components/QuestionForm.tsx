@@ -18,7 +18,6 @@ export default function QuestionForm() {
             },
             credentials: "include",
         },
-        false,
         false
     );
 

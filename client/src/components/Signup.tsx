@@ -13,7 +13,6 @@ export default function Signup() {
             headers: { "Content-Type": "application/json" },
             credentials: "include",
         },
-        false,
         false
     );
 
