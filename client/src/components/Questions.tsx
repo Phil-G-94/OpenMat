@@ -63,19 +63,21 @@ export default function Questions() {
             </section>
 
             {!loading && (
-                <div className="flex flex-row gap-6 justify-center">
+                <div className="flex flex-row gap-[0.25em] sm:gap-2 md:gap-4 justify-center">
                     <button
                         disabled={page === 1}
                         onClick={() => setPage((prev) => prev - 1)}
+                        className="disabled:text-gray-400"
                     >
                         ⬅ Prev
                     </button>
-                    <span>
+                    <span className="hidden sm:inline">
                         Page {page} of {totalPages}
                     </span>
                     <button
                         disabled={page === totalPages}
                         onClick={() => setPage((prev) => prev + 1)}
+                        className="disabled:text-gray-400"
                     >
                         Next ➡
                     </button>

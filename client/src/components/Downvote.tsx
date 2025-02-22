@@ -5,11 +5,11 @@ import { IconArrowBigDown } from "@tabler/icons-react";
 export default function Downvote({
     downvotes,
     id,
-    onDownvoteSuccess,
+    // onDownvoteSuccess,
 }: {
     downvotes: number | undefined;
     id: string;
-    onDownvoteSuccess: () => void;
+    // onDownvoteSuccess: () => void;
 }) {
     const [currentDownvotes, setCurrentDownvotes] = useState<
         number | undefined
@@ -32,7 +32,7 @@ export default function Downvote({
 
     const handleDownvote = async () => {
         await triggerDownvote();
-        onDownvoteSuccess?.(); // refresh answers if needed
+        // onDownvoteSuccess?.(); // refresh answers if needed
     };
 
     return (

@@ -5,11 +5,11 @@ import useFetch from "../hooks/useFetch";
 export default function Upvote({
     upvotes,
     id,
-    onUpvoteSuccess,
+    // onUpvoteSuccess,
 }: {
     upvotes: number | undefined;
     id: string;
-    onUpvoteSuccess: () => void;
+    // onUpvoteSuccess: () => void;
 }) {
     const [currentUpvotes, setCurrentUpvotes] = useState<
         number | undefined
@@ -30,7 +30,7 @@ export default function Upvote({
 
     const handleUpvote = async () => {
         await triggerUpvote();
-        onUpvoteSuccess?.(); // refresh answer if needed
+        // onUpvoteSuccess?.(); // refresh answer if needed
     };
 
     return (
