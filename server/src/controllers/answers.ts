@@ -45,18 +45,21 @@ const postAIAnswer = async (
     next: NextFunction
 ) => {
     try {
-        const { question } = req.body;
+        const { questionId } = req.body;
+
+        const question = await Question.findById(questionId);
 
         const response = await fetch(
-            `http://${process.env.OLLAMA_VM_IP}:${process.env.OLLAMA_VM_PORT}/api/generate`,
+            `http://${process.env.OLLAMA_VM_HOST}:${process.env.OLLAMA_VM_PORT}/api/generate`,
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    model: "mistral",
-                    prompt: `Provide a concise, helpful answer to the following question:\n\n"${question}"`,
+                    model: "gemma:7b",
+                    prompt: question.description,
+                    stream: false,
                 }),
             }
         );

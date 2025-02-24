@@ -2,7 +2,6 @@
 
 ## ToDo
 
-1. Add BE/FE logic for GenAI suggested answers using ollama-js library
 2. add pagination for answers within question
 
 ## Completed
@@ -13,3 +12,4 @@
 4. ~~Nav styling - underline on hover / active link~~
 5. ~~Tweak upvote/downvote logic - fix delayed update bug~~
 6. ~~Add pagination for questions;~~
+7. ~~Add BE/FE logic for GenAI suggested answers using ollama-js library~~

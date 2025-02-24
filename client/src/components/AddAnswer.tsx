@@ -13,6 +13,7 @@ export default function AddAnswer({
     refreshAnswers: () => void;
 }) {
     const [text, setText] = useState("");
+    const [loadingAi, setLoadingAI] = useState(false);
 
     const [postAnswerForm, { error }] = useFetch<{
         body: string;
@@ -44,6 +45,40 @@ export default function AddAnswer({
         setText("");
     };
 
+    const onAIAnswerHandler = async () => {
+        setLoadingAI(true);
+
+        console.log(questionId);
+
+        try {
+            const response = await fetch(
+                "http://localhost:8080/answers/ai-answer",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ questionId }),
+                }
+            );
+
+            console.log(response);
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch AI answer");
+            }
+
+            const data = await response.json();
+
+            setText(data.aiAnswer);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoadingAI(false);
+        }
+    };
+
     const onCancelHandler = () => {
         setText("");
     };
@@ -67,7 +102,6 @@ export default function AddAnswer({
                         minRows={2}
                         maxRows={10}
                         className="w-full border-none focus:outline-none resize-none font-mono bg-inherit placeholder-onyx"
-                        required
                     />
                     <span className="flex flex-row md:gap-3 justify-center md:justify-end">
                         <button
@@ -78,6 +112,7 @@ export default function AddAnswer({
                         >
                             Cancel
                         </button>
+
                         <button
                             type="submit"
                             form="post_answer_form"
@@ -88,6 +123,13 @@ export default function AddAnswer({
                     </span>
                 </form>
             )}
+
+            <button
+                onClick={onAIAnswerHandler}
+                className="rounded-lg bg-yellow border-2 border-bittersweet text-onyx sm:pl-1 sm:pr-1 sm:pt-1 sm:pb-1 md:pl-2 md:pr-2 md:pt-1 md:pb-1"
+            >
+                {loadingAi ? "Loading..." : "Suggest Answer"}
+            </button>
 
             {error && (
                 <p className="text-center">
