@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 
 export default function PrimaryNavigation() {
     return (
-        <header className="sticky top-5">
+        <header>
             <nav>
-                <ul className="flex flex-col gap-4">
+                <ul className="flex flex-row gap-4">
                     <li className="hover:underline hover:underline-offset-4 hover:decoration-bittersweet hover:decoration-[0.25rem]">
                         <NavLink to="/"> Home </NavLink>
                     </li>

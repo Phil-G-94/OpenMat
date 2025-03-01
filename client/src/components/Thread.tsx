@@ -41,7 +41,7 @@ export default function Thread() {
                     loading={loading}
                 />
             </div>
-            <div className="col-span-full w-1/2">
+            <div className="col-span-full">
                 <AddAnswer
                     questionId={questionId}
                     authorId={question?.authorId}
@@ -49,7 +49,7 @@ export default function Thread() {
                 />
             </div>
 
-            <div className="col-span-full w-1/2">
+            <div className="col-span-full">
                 <Answers
                     answers={answers}
                     refreshAnswers={refreshAnswers}
