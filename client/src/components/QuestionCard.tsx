@@ -9,7 +9,9 @@ export default function QuestionCard({
         <Link to={`/questions/${question._id}`}>
             <article className="border-2 border-y-yellow border-x-0">
                 <p className="text-xl">{question.title}</p>
-                <p>{question.description}</p>
+                <p className="whitespace-pre-wrap">
+                    {question.description}
+                </p>
                 <p>
                     Posted on:{" "}
                     {new Date(question.createdAt).toLocaleString()}

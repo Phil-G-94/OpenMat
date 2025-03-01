@@ -4,7 +4,6 @@ import Downvote from "./Downvote";
 
 export default function Answers({
     answers,
-    refreshAnswers,
 }: {
     answers: [Answer] | undefined;
     refreshAnswers: () => void;
@@ -25,17 +24,17 @@ export default function Answers({
                                 ).toLocaleString()}
                             </p>
                         </span>
-                        <p>{answer.content}</p>
+                        <p className="whitespace-pre-wrap">
+                            {answer.content}
+                        </p>
                         <div className="flex flex-row gap-2">
                             <Upvote
                                 upvotes={answer.upvotes}
                                 id={answer._id}
-                                onUpvoteSuccess={refreshAnswers}
                             />
                             <Downvote
                                 downvotes={answer.downvotes}
                                 id={answer._id}
-                                onDownvoteSuccess={refreshAnswers}
                             />
                         </div>
                     </article>
