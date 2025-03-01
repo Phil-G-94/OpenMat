@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { IconArrowBigUp } from "@tabler/icons-react";
 import useFetch from "../hooks/useFetch";
+import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Upvote({
     upvotes,
     id,
-    // onUpvoteSuccess,
 }: {
     upvotes: number | undefined;
     id: string;
-    // onUpvoteSuccess: () => void;
 }) {
     const [currentUpvotes, setCurrentUpvotes] = useState<
         number | undefined
@@ -30,13 +28,12 @@ export default function Upvote({
 
     const handleUpvote = async () => {
         await triggerUpvote();
-        // onUpvoteSuccess?.(); // refresh answer if needed
     };
 
     return (
-        <span className="flex flex-row">
+        <span className="flex flex-row items-center">
             <button onClick={handleUpvote}>
-                <IconArrowBigUp className="hover:fill-bittersweet hover:animate-bounce" />
+                <ArrowUpCircleIcon className="size-8 fill-bittersweet stroke-black active:scale-110" />
             </button>
             <p>{currentUpvotes}</p>
         </span>

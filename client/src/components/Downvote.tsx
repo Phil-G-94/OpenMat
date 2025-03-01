@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
-import { IconArrowBigDown } from "@tabler/icons-react";
+import { ArrowDownCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Downvote({
     downvotes,
     id,
-    // onDownvoteSuccess,
 }: {
     downvotes: number | undefined;
     id: string;
-    // onDownvoteSuccess: () => void;
 }) {
     const [currentDownvotes, setCurrentDownvotes] = useState<
         number | undefined
@@ -32,15 +30,17 @@ export default function Downvote({
 
     const handleDownvote = async () => {
         await triggerDownvote();
-        // onDownvoteSuccess?.(); // refresh answers if needed
     };
 
     return (
-        <span className="flex flex-row">
+        <span className="flex flex-row items-center">
             <button onClick={handleDownvote}>
-                <IconArrowBigDown className="hover:fill-bittersweet hover:animate-bounce" />
+                <ArrowDownCircleIcon className="size-8 fill-bittersweet stroke-black active:scale-110" />
             </button>
-            <p>{currentDownvotes}</p>
+            <p>
+                {currentDownvotes === 0 ? "" : "-"}
+                {currentDownvotes}
+            </p>
         </span>
     );
 }
