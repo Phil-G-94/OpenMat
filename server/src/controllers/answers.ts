@@ -2,6 +2,7 @@ import { Response, Request, NextFunction } from "express";
 import { Question } from "../model/question.js";
 import { Answer } from "../model/answer.js";
 import mongoose from "mongoose";
+import { User } from "../model/user.js";
 
 const postAnswer = async (
     req: Request,
@@ -30,6 +31,10 @@ const postAnswer = async (
         );
 
         await question.save();
+
+        await User.findByIdAndUpdate(authorId, {
+            $inc: { answerCount: 1 },
+        });
 
         res.status(200).json({
             message: "Posted your answer to the thread!",

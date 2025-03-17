@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { QuestionsResponse } from "../types/question";
 import QuestionCard from "./QuestionCard";
+import Leaderboard from "./Leaderboard";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -45,6 +46,8 @@ export default function Questions() {
         <>
             <section className="flex flex-col gap-4">
                 <h2 className="text-2xl text-center">Questions</h2>
+
+                <Leaderboard />
 
                 {loading ? (
                     <p className="text-center">Loading...</p>

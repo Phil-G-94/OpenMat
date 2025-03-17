@@ -6,6 +6,7 @@ const UserSchema = new Schema(
         password: { type: String, required: true },
         reputation: { type: Number, default: 0 },
         rank: { type: String, default: "Rookie" },
+        answerCount: { type: Number, default: 0 },
     },
     { timestamps: true }
 );

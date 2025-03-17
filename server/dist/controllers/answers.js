@@ -1,5 +1,6 @@
 import { Question } from "../model/question.js";
 import { Answer } from "../model/answer.js";
+import { User } from "../model/user.js";
 const postAnswer = async (req, res, next) => {
     const questionId = req.body.questionId;
     const authorId = req.body.authorId;
@@ -16,6 +17,9 @@ const postAnswer = async (req, res, next) => {
         await newAnswer.save();
         question.answers.push(newAnswer._id);
         await question.save();
+        await User.findByIdAndUpdate(authorId, {
+            $inc: { answerCount: 1 },
+        });
         res.status(200).json({
             message: "Posted your answer to the thread!",
         });
