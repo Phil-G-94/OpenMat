@@ -7,6 +7,10 @@ interface LeaderboardEntry {
     reputation?: number;
 }
 
+interface LeaderboardResponse {
+    leaderboard: LeaderboardEntry[];
+}
+
 export default function Leaderboard() {
     const url = useMemo(
         () => `http://localhost:8080/leaderboard`,
@@ -26,7 +30,7 @@ export default function Leaderboard() {
     );
 
     const [getLeaderboard, { data, loading, error }] =
-        useFetch<LeaderboardEntry>(url, defaultOptions, false);
+        useFetch<LeaderboardResponse>(url, defaultOptions, false);
 
     useEffect(() => {
         getLeaderboard();
@@ -38,7 +42,20 @@ export default function Leaderboard() {
         <section>
             {loading && <p>Loading leaderboard...</p>}
             {error && <p>Error loading leaderboard...</p>}
-            <div>{/* iterate over data */}</div>
+            <h3 className="text-lg font-semibold">Leaderboard</h3>
+            <div>
+                {data?.leaderboard.map((item) => {
+                    return (
+                        <div key={item.username}>
+                            <p>
+                                Username: {item.username} | Answer
+                                count: {item.answerCount} | Rep:
+                                {item.reputation}
+                            </p>
+                        </div>
+                    );
+                })}
+            </div>
         </section>
     );
 }

@@ -50,6 +50,9 @@ export default function Thread() {
             </div>
 
             <div className="col-span-full">
+                {answers?.length === undefined && (
+                    <p>No answers yet! Be the first to post one.</p>
+                )}
                 <Answers
                     answers={answers}
                     refreshAnswers={refreshAnswers}

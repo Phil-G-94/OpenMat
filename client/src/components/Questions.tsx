@@ -42,6 +42,8 @@ export default function Questions() {
         }
     }, [data]);
 
+    console.log(data);
+
     return (
         <>
             <section className="flex flex-col gap-4">
@@ -62,6 +64,12 @@ export default function Questions() {
                             );
                         })}
                     </div>
+                )}
+
+                {data?.questions.length === 0 && (
+                    <p className="text-center">
+                        No questions - ask one!
+                    </p>
                 )}
             </section>
 
