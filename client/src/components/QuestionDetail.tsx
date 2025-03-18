@@ -1,4 +1,5 @@
-import { Question, PopulatedUser } from "../types/question";
+import { Question } from "../types/question";
+import { PopulatedUser } from "../types/user";
 
 export default function QuestionDetail({
     question,

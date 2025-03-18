@@ -20,7 +20,6 @@ export default function Login() {
             },
             credentials: "include",
         },
-        false,
         false
     );
 

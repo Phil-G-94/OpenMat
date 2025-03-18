@@ -1,15 +1,6 @@
 import { useEffect, useMemo } from "react";
 import useFetch from "../hooks/useFetch";
-
-interface LeaderboardEntry {
-    username: string;
-    answerCount: number;
-    reputation?: number;
-}
-
-interface LeaderboardResponse {
-    leaderboard: LeaderboardEntry[];
-}
+import { LeaderboardResponse } from "../types/leaderboard";
 
 export default function Leaderboard() {
     const url = useMemo(

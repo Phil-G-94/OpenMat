@@ -1,4 +1,4 @@
-import { Answer } from "../types/question";
+import { Answer } from "../types/answer";
 import Upvote from "./Upvote";
 import Downvote from "./Downvote";
 

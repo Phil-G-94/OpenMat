@@ -1,12 +1,3 @@
-interface PopulatedUser {
-    _id: string;
-    username: string;
-    email: string;
-    password: string;
-    reputation: number;
-    rank: string;
-}
-
 interface Question {
     _id: string;
     title: string;
@@ -16,15 +7,6 @@ interface Question {
     createdAt: string;
     updatedAt: string;
     __v: number;
-}
-
-interface Answer {
-    _id: ObjectId;
-    questionId: ObjectId;
-    authorId: ObjectId;
-    content: string;
-    upvotes?: number;
-    downvotes?: number;
 }
 
 interface QuestionsResponse {
@@ -40,10 +22,4 @@ interface QuestionResponse {
     answer: Answer[];
 }
 
-export {
-    PopulatedUser,
-    Question,
-    Answer,
-    QuestionsResponse,
-    QuestionResponse,
-};
+export { Question, QuestionsResponse, QuestionResponse };
