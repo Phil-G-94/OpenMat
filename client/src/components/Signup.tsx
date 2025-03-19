@@ -1,7 +1,9 @@
 import { FormEvent } from "react";
 import useFetch from "../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+    const navigate = useNavigate();
     const [postSignupUser, { loading, error }] = useFetch<{
         username: string;
         email: string;
@@ -32,6 +34,9 @@ export default function Signup() {
         await postSignupUser({
             body: JSON.stringify(formDataObject),
         });
+
+        event.target.reset();
+        navigate("/auth/login");
     };
 
     return (
