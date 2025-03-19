@@ -27,26 +27,30 @@ export default function Leaderboard() {
         getLeaderboard();
     }, [getLeaderboard]);
 
-    console.log(data);
-
     return (
         <section>
             {loading && <p>Loading leaderboard...</p>}
             {error && <p>Error loading leaderboard...</p>}
-            <h3 className="text-lg font-semibold">Leaderboard</h3>
-            <div>
+            <h3 className="text-lg text-center font-semibold">
+                Leaderboard
+            </h3>
+            <article className="grid grid-cols-3 gap-2">
                 {data?.leaderboard.map((item) => {
                     return (
                         <div key={item.username}>
-                            <p>
-                                Username: {item.username} | Answer
-                                count: {item.answerCount} | Rep:
-                                {item.reputation}
+                            <p className="col-span-1">
+                                Username: {item.username}
+                            </p>
+                            <p className="col-span-2">
+                                Answer count: {item.answerCount}
+                            </p>
+                            <p className="col-span-3">
+                                Rep: {item.reputation}
                             </p>
                         </div>
                     );
                 })}
-            </div>
+            </article>
         </section>
     );
 }
