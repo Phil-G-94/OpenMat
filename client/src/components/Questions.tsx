@@ -49,22 +49,28 @@ export default function Questions() {
             <section className="flex flex-col gap-4">
                 <h2 className="text-2xl text-center">Questions</h2>
 
-                <Leaderboard />
-
-                {loading ? (
-                    <p className="text-center">Loading...</p>
-                ) : (
-                    <div className="flex flex-col gap-4">
-                        {data?.questions.map((question) => {
-                            return (
-                                <QuestionCard
-                                    key={question._id}
-                                    question={question}
-                                />
-                            );
-                        })}
+                <article className="grid grid-cols-3 justify-center">
+                    <div className="col-span-1">
+                        <Leaderboard />
                     </div>
-                )}
+
+                    <div>
+                        {loading ? (
+                            <p className="text-center">Loading...</p>
+                        ) : (
+                            <div className="flex flex-col gap-4">
+                                {data?.questions.map((question) => {
+                                    return (
+                                        <QuestionCard
+                                            key={question._id}
+                                            question={question}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+                </article>
 
                 {data?.questions.length === 0 && (
                     <p className="text-center">

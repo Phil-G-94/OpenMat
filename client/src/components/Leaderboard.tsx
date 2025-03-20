@@ -34,15 +34,15 @@ export default function Leaderboard() {
             <h3 className="text-lg text-center font-semibold">
                 Leaderboard
             </h3>
-            <article className="grid grid-cols-3 gap-2">
+            <article className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {data?.leaderboard.map((item) => {
                     return (
                         <div key={item.username}>
                             <p className="col-span-1">
-                                Username: {item.username}
+                                {item.username}
                             </p>
                             <p className="col-span-2">
-                                Answer count: {item.answerCount}
+                                Answers: {item.answerCount}
                             </p>
                             <p className="col-span-3">
                                 Rep: {item.reputation}
