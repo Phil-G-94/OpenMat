@@ -38,15 +38,9 @@ export default function Leaderboard() {
                 {data?.leaderboard.map((item) => {
                     return (
                         <div key={item.username}>
-                            <p className="col-span-1">
-                                {item.username}
-                            </p>
-                            <p className="col-span-2">
-                                Answers: {item.answerCount}
-                            </p>
-                            <p className="col-span-3">
-                                Rep: {item.reputation}
-                            </p>
+                            <p>{item.username}</p>
+                            <p>Answers: {item.answerCount}</p>
+                            <p>Rep: {item.reputation}</p>
                         </div>
                     );
                 })}

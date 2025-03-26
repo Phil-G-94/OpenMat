@@ -42,19 +42,17 @@ export default function Questions() {
         }
     }, [data]);
 
-    console.log(data);
-
     return (
         <>
             <section className="flex flex-col gap-4">
                 <h2 className="text-2xl text-center">Questions</h2>
 
-                <article className="grid grid-cols-3 justify-center">
-                    <div className="col-span-1">
+                <article className="grid grid-cols-1 md:grid-cols-3 place-items-center">
+                    <section className="col-span-1 self-start">
                         <Leaderboard />
-                    </div>
+                    </section>
 
-                    <div>
+                    <section>
                         {loading ? (
                             <p className="text-center">Loading...</p>
                         ) : (
@@ -69,7 +67,7 @@ export default function Questions() {
                                 })}
                             </div>
                         )}
-                    </div>
+                    </section>
                 </article>
 
                 {data?.questions.length === 0 && (
