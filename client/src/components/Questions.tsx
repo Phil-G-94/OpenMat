@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import { QuestionsResponse } from "../types/question";
 import QuestionCard from "./QuestionCard";
 import Leaderboard from "./Leaderboard";
+import { BackwardIcon, ForwardIcon } from "@heroicons/react/16/solid";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -54,7 +55,9 @@ export default function Questions() {
 
                     <section>
                         {loading ? (
-                            <p className="text-center">Loading...</p>
+                            <p className="text-center">
+                                Loading questions...
+                            </p>
                         ) : (
                             <div className="flex flex-col gap-4">
                                 {data?.questions.map((question) => {
@@ -78,23 +81,24 @@ export default function Questions() {
             </section>
 
             {!loading && (
-                <div className="flex flex-row gap-[0.25em] sm:gap-2 md:gap-4 justify-center">
+                <div className="flex flex-row gap-[0.25em] sm:gap-2 md:gap-4 place-items-center fixed top-3/4">
                     <button
                         disabled={page === 1}
                         onClick={() => setPage((prev) => prev - 1)}
                         className="disabled:text-gray-400"
                     >
-                        ⬅ Prev
+                        <BackwardIcon className="size-6" /> Prev
                     </button>
                     <span className="hidden sm:inline">
-                        Page {page} of {totalPages}
+                        Page {page} ({totalPages})
                     </span>
                     <button
                         disabled={page === totalPages}
                         onClick={() => setPage((prev) => prev + 1)}
                         className="disabled:text-gray-400"
                     >
-                        Next ➡
+                        <ForwardIcon className="size-6" />
+                        Next
                     </button>
                 </div>
             )}
