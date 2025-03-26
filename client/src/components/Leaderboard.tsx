@@ -34,11 +34,14 @@ export default function Leaderboard() {
             <h3 className="text-lg text-center font-semibold">
                 Leaderboard
             </h3>
-            <article className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <article className="grid grid-cols-2 justify-between just gap-8">
                 {data?.leaderboard.map((item) => {
                     return (
-                        <div key={item.username}>
-                            <p>{item.username}</p>
+                        <div
+                            key={item.username}
+                            className="flex flex-col items-center"
+                        >
+                            <p className="text-lg">{item.username}</p>
                             <p>Answers: {item.answerCount}</p>
                             <p>Rep: {item.reputation}</p>
                         </div>

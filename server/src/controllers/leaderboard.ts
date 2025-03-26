@@ -13,7 +13,7 @@ const getLeaderboard = async (
             "username answerCount reputation"
         )
             .sort({ answerCount: -1 })
-            .limit(10);
+            .limit(8);
 
         res.status(200).json({ leaderboard });
     } catch (err) {

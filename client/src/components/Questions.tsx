@@ -48,12 +48,12 @@ export default function Questions() {
             <section className="flex flex-col gap-4">
                 <h2 className="text-2xl text-center">Questions</h2>
 
-                <article className="grid grid-cols-1 md:grid-cols-3 place-items-center">
-                    <section className="col-span-1 self-start">
+                <article className="grid grid-cols-1 gap-10 md:grid-cols-4">
+                    <section className="col-span-full md:col-span-1 p-2">
                         <Leaderboard />
                     </section>
 
-                    <section>
+                    <section className="col-span-full md:col-span-2">
                         {loading ? (
                             <p className="text-center">
                                 Loading questions...
@@ -81,7 +81,7 @@ export default function Questions() {
             </section>
 
             {!loading && (
-                <div className="flex flex-row gap-[0.25em] sm:gap-2 md:gap-4 place-items-center fixed top-3/4">
+                <div className="flex flex-row self-center gap-2 place-items-center md:gap-4 ">
                     <button
                         disabled={page === 1}
                         onClick={() => setPage((prev) => prev - 1)}
