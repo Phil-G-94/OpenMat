@@ -1,11 +1,9 @@
-interface LeaderboardEntry {
+export interface LeaderboardEntry {
     username: string;
     answerCount: number;
     reputation?: number;
 }
 
-interface LeaderboardResponse {
+export interface LeaderboardResponse {
     leaderboard: LeaderboardEntry[];
 }
-
-export { LeaderboardResponse };

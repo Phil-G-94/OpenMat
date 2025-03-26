@@ -1,4 +1,4 @@
-interface Question {
+export interface Question {
     _id: string;
     title: string;
     description: string;
@@ -9,7 +9,7 @@ interface Question {
     __v: number;
 }
 
-interface QuestionsResponse {
+export interface QuestionsResponse {
     message: string;
     questions: Question[];
     limit: number;
@@ -17,9 +17,7 @@ interface QuestionsResponse {
     totalPages: number;
 }
 
-interface QuestionResponse {
+export interface QuestionResponse {
     question: Question;
     answer: Answer[];
 }
-
-export { Question, QuestionsResponse, QuestionResponse };

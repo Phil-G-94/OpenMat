@@ -1,4 +1,4 @@
-interface PopulatedUser {
+export interface PopulatedUser {
     _id: string;
     username: string;
     email: string;
@@ -6,5 +6,3 @@ interface PopulatedUser {
     reputation: number;
     rank: string;
 }
-
-export { PopulatedUser };

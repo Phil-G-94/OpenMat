@@ -1,4 +1,4 @@
-interface Answer {
+export interface Answer {
     _id: ObjectId;
     questionId: ObjectId;
     authorId: ObjectId;
@@ -6,5 +6,3 @@ interface Answer {
     upvotes?: number;
     downvotes?: number;
 }
-
-export { Answer };
