@@ -38,7 +38,7 @@ export default function useFetch<T>(
 
                 if (!response.ok) {
                     throw new Error(
-                        `HTTP error. ${response.status} : ${response.statusText}`
+                        `HTTP Error ${response.status}: ${response.statusText}`
                     );
                 }
 

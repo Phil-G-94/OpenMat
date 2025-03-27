@@ -11,7 +11,7 @@ import HomePage from "./pages/HomePage";
 import QuestionForm from "./components/QuestionForm";
 import Thread from "./components/Thread";
 import RequireAuth from "./pages/RequireAuth";
-import Error from "./components/Error";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
     const router = createBrowserRouter(
@@ -19,7 +19,7 @@ function App() {
             <Route
                 path="/"
                 element={<RootLayout />}
-                errorElement={<Error />}
+                errorElement={<ErrorPage />}
             >
                 <Route index element={<HomePage />} />
                 <Route path="auth/signup" element={<Signup />} />

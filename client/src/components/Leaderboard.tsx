@@ -20,8 +20,11 @@ export default function Leaderboard() {
         []
     );
 
-    const [getLeaderboard, { data, loading, error }] =
-        useFetch<LeaderboardResponse>(url, defaultOptions, false);
+    const [getLeaderboard, { data }] = useFetch<LeaderboardResponse>(
+        url,
+        defaultOptions,
+        false
+    );
 
     useEffect(() => {
         getLeaderboard();
@@ -29,8 +32,6 @@ export default function Leaderboard() {
 
     return (
         <section>
-            {loading && <p>Loading leaderboard...</p>}
-            {error && <p>Error loading leaderboard...</p>}
             <h3 className="text-lg text-center font-semibold">
                 Leaderboard
             </h3>

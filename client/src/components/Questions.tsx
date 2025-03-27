@@ -3,7 +3,8 @@ import useFetch from "../hooks/useFetch";
 import { QuestionsResponse } from "../types/question";
 import QuestionCard from "./QuestionCard";
 import Leaderboard from "./Leaderboard";
-import { BackwardIcon, ForwardIcon } from "@heroicons/react/16/solid";
+import Error from "./Error";
+import PageControls from "./PageControls";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -43,6 +44,8 @@ export default function Questions() {
         }
     }, [data]);
 
+    console.log(error);
+
     return (
         <>
             <section className="flex flex-col gap-4">
@@ -53,6 +56,12 @@ export default function Questions() {
                         <Leaderboard />
                     </section>
 
+                    {error && (
+                        <section className="col-span-full">
+                            <Error />
+                            <p className="text-center">{error}</p>
+                        </section>
+                    )}
                     <section className="col-span-full md:col-span-2">
                         {loading ? (
                             <p className="text-center">
@@ -81,29 +90,12 @@ export default function Questions() {
             </section>
 
             {!loading && (
-                <div className="flex flex-row self-center gap-2 place-items-center md:gap-4 ">
-                    <button
-                        disabled={page === 1}
-                        onClick={() => setPage((prev) => prev - 1)}
-                        className="disabled:text-gray-400"
-                    >
-                        <BackwardIcon className="size-6" /> Prev
-                    </button>
-                    <span className="hidden sm:inline">
-                        Page {page} ({totalPages})
-                    </span>
-                    <button
-                        disabled={page === totalPages}
-                        onClick={() => setPage((prev) => prev + 1)}
-                        className="disabled:text-gray-400"
-                    >
-                        <ForwardIcon className="size-6" />
-                        Next
-                    </button>
-                </div>
+                <PageControls
+                    page={page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                />
             )}
-
-            {error && <p>{error}</p>}
         </>
     );
 }
