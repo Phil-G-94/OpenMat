@@ -38,7 +38,7 @@ const postSignup = async (
 
         // save to DB
 
-        user.save();
+        await user.save();
 
         res.status(200).json({ message: "Signup successful." });
     } catch (err) {
@@ -53,49 +53,53 @@ const postLogin = async (
 ): Promise<String | any> => {
     const { login_username, login_password } = req.body;
 
-    // find user in DB
+    try {
+        // find user in DB
 
-    const existingUser = await User.findOne({
-        username: login_username,
-    });
+        const existingUser = await User.findOne({
+            username: login_username,
+        });
 
-    if (!existingUser) {
-        return res
-            .status(400)
-            .json({ message: "User not found. Please sign up." });
+        if (!existingUser) {
+            return res
+                .status(400)
+                .json({ message: "User not found. Please sign up." });
+        }
+
+        // password comparison
+
+        const isValidPassword = await bcrypt.compare(
+            login_password,
+            existingUser.password
+        );
+
+        if (!isValidPassword) {
+            return res
+                .status(400)
+                .json({ message: "Incorrect credentials." });
+        }
+
+        // sign token
+
+        const token = jwt.sign(
+            { userId: existingUser._id.toString() },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        // set token through cookies
+        res.cookie("token", token, {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: false,
+        });
+
+        res.status(200).json({
+            message: "Login successful",
+        });
+    } catch (err) {
+        next(err);
     }
-
-    // password comparison
-
-    const isValidPassword = await bcrypt.compare(
-        login_password,
-        existingUser.password
-    );
-
-    if (!isValidPassword) {
-        return res
-            .status(400)
-            .json({ message: "Incorrect credentials." });
-    }
-
-    // sign token
-
-    const token = jwt.sign(
-        { userId: existingUser._id.toString() },
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" }
-    );
-
-    // set token through cookies
-    res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: false,
-    });
-
-    res.status(200).json({
-        message: "Login successful",
-    });
 };
 
 export { postSignup, postLogin };

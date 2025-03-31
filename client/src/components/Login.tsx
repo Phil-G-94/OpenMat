@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -7,10 +7,9 @@ export default function Login() {
     const navigate = useNavigate();
     const { fetchAuthentication } = useAuth();
 
-    const [postLoginUser, { loading, error }] = useFetch<{
+    const [postLoginUser, { data, loading, error }] = useFetch<{
         username: string;
         password: string;
-        data: string;
     }>(
         "http://localhost:8080/auth/login",
         {
@@ -41,9 +40,12 @@ export default function Login() {
         });
 
         await fetchAuthentication();
-
-        navigate("/");
     };
+
+    useEffect(() => {
+        if (!data) return;
+        if (data) navigate("/");
+    }, [data, navigate]);
 
     return (
         <section className="flex flex-col items-center gap-6">
@@ -86,7 +88,6 @@ export default function Login() {
                     {loading ? "Logging in" : "Log in"}
                 </button>
             </form>
-
             {error && <p>{error}</p>}
         </section>
     );

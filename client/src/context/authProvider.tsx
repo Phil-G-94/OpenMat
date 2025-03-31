@@ -27,8 +27,8 @@ export const AuthProvider = ({
                 setIsAuthed(false);
             }
         } catch (err) {
-            console.log(err);
             setIsAuthed(false);
+            throw err;
         } finally {
             setLoadingAuth(false);
         }
