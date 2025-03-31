@@ -3,7 +3,6 @@ import useFetch from "../hooks/useFetch";
 import { QuestionsResponse } from "../types/question";
 import QuestionCard from "./QuestionCard";
 import Leaderboard from "./Leaderboard";
-import Error from "./Error";
 import PageControls from "./PageControls";
 
 const ITEMS_PER_PAGE = 4;
@@ -31,8 +30,11 @@ export default function Questions() {
         []
     );
 
-    const [getData, { data, loading, error }] =
-        useFetch<QuestionsResponse>(url, defaultOptions, true);
+    const [getData, { data, loading }] = useFetch<QuestionsResponse>(
+        url,
+        defaultOptions,
+        true
+    );
 
     useEffect(() => {
         void getData();
@@ -44,8 +46,6 @@ export default function Questions() {
         }
     }, [data]);
 
-    console.log(error);
-
     return (
         <>
             <section className="flex flex-col gap-4">
@@ -53,15 +53,9 @@ export default function Questions() {
 
                 <article className="grid grid-cols-1 gap-10 md:grid-cols-4">
                     <section className="col-span-full md:col-span-1 p-2">
-                        <Leaderboard />
+                        {data && <Leaderboard />}
                     </section>
 
-                    {error && (
-                        <section className="col-span-full">
-                            <Error />
-                            <p className="text-center">{error}</p>
-                        </section>
-                    )}
                     <section className="col-span-full md:col-span-2">
                         {loading ? (
                             <p className="text-center">

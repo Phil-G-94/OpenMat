@@ -83,7 +83,6 @@ export default function AddAnswer({
             {!error && (
                 <form
                     onSubmit={onSubmitHandler}
-                    action=""
                     id="post_answer_form"
                     className="w-full border-2 p-4 border-onyx rounded-lg shadow-sm bg-inherit"
                 >

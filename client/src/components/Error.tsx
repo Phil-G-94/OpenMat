@@ -10,14 +10,26 @@ export default function Error() {
         statusText: string;
     };
 
-    if (routeError) {
+    const cause = routeError.data.split(": ")[1];
+
+    if (routeError.status === 404) {
         errorText = (
             <div>
                 <h1 className="text-4xl text-center">
-                    Error {routeError.status}
+                    404 Error: Page not found!
                 </h1>
-                <p className="text-center">{routeError.statusText}</p>
-                <p className="text-center">{routeError.data}</p>
+                <p className="text-center">{cause}</p>
+            </div>
+        );
+    }
+
+    if (routeError.status === 401) {
+        errorText = (
+            <div className="flex justify-center">
+                <h1 className="text-4xl text-center">
+                    401 Error: Unauthorised request!
+                </h1>
+                <p className="text-center">{cause}</p>
             </div>
         );
     }
