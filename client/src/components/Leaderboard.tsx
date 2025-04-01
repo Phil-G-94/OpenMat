@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useFetch } from "../hooks/useFetch";
-import { LeaderboardResponse } from "../types/leaderboard";
+import { LeaderboardResponse } from "../types/api";
 
 export default function Leaderboard() {
     const url = useMemo(() => `http://localhost:8080/leaderboard`, []);

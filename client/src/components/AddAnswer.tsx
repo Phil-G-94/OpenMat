@@ -1,7 +1,7 @@
 import TextareaAutosize from "react-textarea-autosize";
 import { FormEvent, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
-import { PopulatedUser } from "../types/user";
+import { PopulatedUser } from "../types/api";
 
 export default function AddAnswer({
     questionId,

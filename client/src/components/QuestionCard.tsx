@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Question } from "../types/question";
+
 export default function QuestionCard({ question }: { question: Question }) {
     return (
         <Link to={`/questions/${question._id}`}>

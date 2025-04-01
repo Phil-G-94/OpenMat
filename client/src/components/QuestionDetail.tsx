@@ -1,6 +1,5 @@
 import { FetchError } from "../hooks/useFetch";
-import { Question } from "../types/question";
-import { PopulatedUser } from "../types/user";
+import { Question, PopulatedUser } from "../types/api";
 
 export default function QuestionDetail({
     question,

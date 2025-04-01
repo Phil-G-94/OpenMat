@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
-import { QuestionsResponse } from "../types/question";
+import { QuestionsResponse } from "../types/api";
 import QuestionCard from "./QuestionCard";
 import Leaderboard from "./Leaderboard";
 import PageControls from "./PageControls";

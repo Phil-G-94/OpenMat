@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { QuestionResponse } from "../types/question";
+import { QuestionResponse } from "../types/api";
 import { useFetch } from "../hooks/useFetch";
 import { useMemo } from "react";
 import AddAnswer from "./AddAnswer";

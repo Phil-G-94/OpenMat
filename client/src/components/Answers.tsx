@@ -1,11 +1,11 @@
-import { Answer } from "../types/answer";
+import { Answer } from "../types/api";
 import Upvote from "./Upvote";
 import Downvote from "./Downvote";
 
 export default function Answers({
     answers,
 }: {
-    answers: [Answer] | undefined;
+    answers: Answer[] | undefined;
     refreshAnswers: () => void;
 }) {
     return (
