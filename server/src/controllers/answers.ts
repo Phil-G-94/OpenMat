@@ -4,11 +4,7 @@ import { Answer } from "../model/answer.js";
 import mongoose from "mongoose";
 import { User } from "../model/user.js";
 
-const postAnswer = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const postAnswer = async (req: Request, res: Response, next: NextFunction) => {
     const questionId = req.body.questionId;
     const authorId = req.body.authorId;
     const content = req.body.content;
@@ -26,9 +22,7 @@ const postAnswer = async (
 
         await newAnswer.save();
 
-        question.answers.push(
-            newAnswer._id as mongoose.Types.ObjectId
-        );
+        question.answers.push(newAnswer._id as mongoose.Types.ObjectId);
 
         await question.save();
 
@@ -44,11 +38,7 @@ const postAnswer = async (
     }
 };
 
-const postAIAnswer = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const postAIAnswer = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { questionId } = req.body;
 
@@ -77,11 +67,7 @@ const postAIAnswer = async (
     }
 };
 
-const patchUpvotes = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const patchUpvotes = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
 
@@ -104,11 +90,7 @@ const patchUpvotes = async (
     }
 };
 
-const patchDownvotes = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const patchDownvotes = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
 

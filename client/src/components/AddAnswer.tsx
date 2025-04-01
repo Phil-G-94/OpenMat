@@ -1,6 +1,6 @@
 import TextareaAutosize from "react-textarea-autosize";
 import { FormEvent, useState } from "react";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { PopulatedUser } from "../types/user";
 
 export default function AddAnswer({
@@ -25,9 +25,7 @@ export default function AddAnswer({
         credentials: "include",
     });
 
-    const onSubmitHandler = async (
-        event: FormEvent<HTMLFormElement>
-    ) => {
+    const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const answer = {
@@ -48,17 +46,14 @@ export default function AddAnswer({
     const onAIAnswerHandler = async () => {
         setLoadingAI(true);
         try {
-            const response = await fetch(
-                "http://localhost:8080/answers/ai-answer",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ questionId }),
-                }
-            );
+            const response = await fetch("http://localhost:8080/answers/ai-answer", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ questionId }),
+            });
 
             if (!response.ok) {
                 throw new Error("Failed to fetch AI answer");
@@ -113,9 +108,7 @@ export default function AddAnswer({
                             onClick={onAIAnswerHandler}
                             className="rounded-lg bg-yellow border-2 border-bittersweet text-onyx sm:pl-1 sm:pr-1 sm:pt-1 sm:pb-1 md:pl-2 md:pr-2 md:pt-1 md:pb-1"
                         >
-                            {loadingAi
-                                ? "Loading..."
-                                : "Suggest Answer"}
+                            {loadingAi ? "Loading..." : "Suggest Answer"}
                         </button>
 
                         <button
@@ -131,8 +124,8 @@ export default function AddAnswer({
 
             {error && (
                 <p className="text-center">
-                    There was an error with posting your answer.
-                    Please refresh the page and try again.
+                    There was an error with posting your answer. Please refresh the
+                    page and try again.
                 </p>
             )}
         </section>

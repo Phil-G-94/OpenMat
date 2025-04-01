@@ -1,10 +1,5 @@
 import jwt from "jsonwebtoken";
-import {
-    Request,
-    Response,
-    NextFunction,
-    RequestHandler,
-} from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 
 export const authJWT: RequestHandler = (
     req: Request,
@@ -22,10 +17,9 @@ export const authJWT: RequestHandler = (
     }
 
     try {
-        const verifiedToken = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-        ) as { userId: string };
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET) as {
+            userId: string;
+        };
 
         req.userId = verifiedToken.userId;
 

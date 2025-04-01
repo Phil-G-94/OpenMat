@@ -1,26 +1,28 @@
 import { useState, useCallback, useEffect } from "react";
 
+export interface FetchError {
+    message: string;
+    status?: number;
+    details?: string;
+}
+
 interface FetchState<T> {
     data: T | null; // store fetched data || null if nothing is fetched yet
     loading: boolean; // indicates ongoing fetch operation
-    error: string | null; // stores any error msgs from fetch || null if none
+    error: FetchError | null; // stores any error msgs from fetch || null if none
 }
 
 type FetchOptions = RequestInit; // alias for type used by Fetch API
 
-export default function useFetch<T>(
+export function useFetch<T>(
     url: string,
     defaultOptions?: FetchOptions,
     autoFetch = false // control automatic fetching
-): [
-    (fetchOptions?: FetchOptions) => Promise<void>,
-    FetchState<T>,
-    () => void,
-] {
+): [(fetchOptions?: FetchOptions) => Promise<void>, FetchState<T>, () => void] {
     // state(s)
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<FetchError | null>(null);
     const [fetchTrigger, setFetchTrigger] = useState(0); // track re-fetch request
 
     // generic function using the Fetch API
@@ -37,16 +39,25 @@ export default function useFetch<T>(
                 });
 
                 if (!response.ok) {
-                    throw new Error(
-                        `HTTP Error ${response.status}: ${response.statusText}`
-                    );
+                    let errorDetails;
+
+                    try {
+                        errorDetails = await response.json();
+                    } catch {
+                        errorDetails = null;
+                    }
+
+                    throw {
+                        message: `HTTP Error ${response.status}: ${response.statusText}`,
+                        details: errorDetails.message,
+                    };
                 }
 
                 const result: T = await response.json();
 
                 setData(result);
             } catch (err) {
-                setError((err as Error).message);
+                setError(err as FetchError);
             } finally {
                 setLoading(false);
             }

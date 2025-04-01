@@ -9,9 +9,7 @@ export default function PrimaryNavigation() {
                         <NavLink to="/"> Home </NavLink>
                     </li>
                     <li className="hover:underline hover:underline-offset-4 hover:decoration-bittersweet hover:decoration-[0.25rem]">
-                        <NavLink to="questions">
-                            Post Question
-                        </NavLink>
+                        <NavLink to="questions">Post Question</NavLink>
                     </li>
 
                     <li className="hover:underline hover:underline-offset-4 hover:decoration-bittersweet hover:decoration-[0.25rem]">

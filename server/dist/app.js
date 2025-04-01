@@ -65,10 +65,7 @@ app.use((err, req, res, next) => {
     try {
         await connectToDatabase(dbUri);
         app.listen(process.env.PORT || 8080, () => {
-            console.log(
-                "Server is running on port",
-                process.env.PORT || 8080
-            );
+            console.log("Server is running on port", process.env.PORT || 8080);
         });
     } catch (error) {
         console.error(error);

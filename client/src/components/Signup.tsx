@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -18,9 +18,7 @@ export default function Signup() {
         false
     );
 
-    const onSubmitHandler = async (
-        event: FormEvent<HTMLFormElement>
-    ) => {
+    const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!(event.target instanceof HTMLFormElement)) {
@@ -38,6 +36,13 @@ export default function Signup() {
         event.target.reset();
         navigate("/auth/login");
     };
+
+    const errorData = !error
+        ? []
+        : Object.entries(error).map(([key, value]) => ({
+              key,
+              value: typeof value === "object" ? JSON.stringify(value) : value,
+          }));
 
     return (
         <section className="flex flex-col items-center gap-6">
@@ -95,7 +100,13 @@ export default function Signup() {
                 </button>
             </form>
 
-            {error && <p>{error}</p>}
+            {errorData.map(({ key, value }) => {
+                return (
+                    <div key={key}>
+                        <p className="text-xl text-center text-red-600">{value}</p>
+                    </div>
+                );
+            })}
         </section>
     );
 }

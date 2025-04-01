@@ -2,16 +2,9 @@ import { NextFunction, Request, Response } from "express";
 
 import { User } from "../model/user.js";
 
-const getLeaderboard = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const getLeaderboard = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const leaderboard = await User.find(
-            {},
-            "username answerCount reputation"
-        )
+        const leaderboard = await User.find({}, "username answerCount reputation")
             .sort({ answerCount: -1 })
             .limit(8);
 

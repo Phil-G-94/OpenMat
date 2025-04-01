@@ -1,11 +1,5 @@
 import dotenv from "dotenv";
-import express, {
-    urlencoded,
-    json,
-    Request,
-    Response,
-    NextFunction,
-} from "express";
+import express, { urlencoded, json, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
@@ -70,18 +64,12 @@ app.use(leaderboardRoute);
 
 // error-handling middleware
 app.use(
-    (
-        err: Error | CustomError,
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ) => {
+    (err: Error | CustomError, req: Request, res: Response, next: NextFunction) => {
         if (res.headersSent) {
             return next(err);
         }
 
-        const status =
-            err instanceof CustomError ? err.statusCode : 500;
+        const status = err instanceof CustomError ? err.statusCode : 500;
 
         const message = err.message;
 
@@ -101,10 +89,7 @@ app.use(
     try {
         await connectToDatabase(dbUri);
         app.listen(process.env.PORT || 8080, () => {
-            console.log(
-                "Server is running on port",
-                process.env.PORT || 8080
-            );
+            console.log("Server is running on port", process.env.PORT || 8080);
         });
     } catch (error) {
         console.error(error);

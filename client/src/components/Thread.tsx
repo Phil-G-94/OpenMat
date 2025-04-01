@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { QuestionResponse } from "../types/question";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { useMemo } from "react";
 import AddAnswer from "./AddAnswer";
 import Answers from "./Answers";
@@ -25,8 +25,11 @@ export default function Thread() {
         []
     );
 
-    const [, { data, loading, error }, refreshAnswers] =
-        useFetch<QuestionResponse>(url, defaultOptions, true);
+    const [, { data, loading, error }, refreshAnswers] = useFetch<QuestionResponse>(
+        url,
+        defaultOptions,
+        true
+    );
 
     const question = data?.question;
 
@@ -53,10 +56,7 @@ export default function Thread() {
                 {answers?.length === undefined && (
                     <p>No answers yet! Be the first to post one.</p>
                 )}
-                <Answers
-                    answers={answers}
-                    refreshAnswers={refreshAnswers}
-                />
+                <Answers answers={answers} refreshAnswers={refreshAnswers} />
             </div>
         </div>
     );

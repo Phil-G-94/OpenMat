@@ -1,12 +1,9 @@
 import { useEffect, useMemo } from "react";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { LeaderboardResponse } from "../types/leaderboard";
 
 export default function Leaderboard() {
-    const url = useMemo(
-        () => `http://localhost:8080/leaderboard`,
-        []
-    );
+    const url = useMemo(() => `http://localhost:8080/leaderboard`, []);
 
     const defaultOptions = useMemo(
         () =>
@@ -32,9 +29,7 @@ export default function Leaderboard() {
 
     return (
         <section>
-            <h3 className="text-lg text-center font-semibold">
-                Leaderboard
-            </h3>
+            <h3 className="text-lg text-center font-semibold">Leaderboard</h3>
             <article className="grid grid-cols-2 justify-between just gap-8">
                 {data?.leaderboard.map((item) => {
                     return (

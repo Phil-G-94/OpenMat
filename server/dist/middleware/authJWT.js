@@ -8,10 +8,7 @@ export const authJWT = (req, res, next) => {
         throw new Error("JWT_Secret not set.");
     }
     try {
-        const verifiedToken = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-        );
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = verifiedToken.userId;
         next();
     } catch (err) {

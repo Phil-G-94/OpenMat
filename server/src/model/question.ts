@@ -23,7 +23,4 @@ const QuestionSchema = new Schema<IQuestion>(
     { timestamps: true }
 );
 
-export const Question = mongoose.model<IQuestion>(
-    "Question",
-    QuestionSchema
-);
+export const Question = mongoose.model<IQuestion>("Question", QuestionSchema);

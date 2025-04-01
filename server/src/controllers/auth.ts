@@ -9,8 +9,7 @@ const postSignup = async (
     next: NextFunction
 ): Promise<String | any> => {
     try {
-        const { signup_username, signup_email, signup_password } =
-            req.body;
+        const { signup_username, signup_email, signup_password } = req.body;
 
         const existingUser = await User.findOne({
             email: signup_email,
@@ -74,9 +73,7 @@ const postLogin = async (
         );
 
         if (!isValidPassword) {
-            return res
-                .status(400)
-                .json({ message: "Incorrect credentials." });
+            return res.status(400).json({ message: "Incorrect credentials." });
         }
 
         // sign token

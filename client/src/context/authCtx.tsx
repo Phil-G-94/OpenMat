@@ -6,6 +6,4 @@ interface AuthContextType {
     fetchAuthentication: () => Promise<void | undefined>;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-    undefined
-);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);

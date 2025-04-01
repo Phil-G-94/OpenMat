@@ -24,18 +24,10 @@ export default function Answers({
                                 ).toLocaleString()}
                             </p>
                         </span>
-                        <p className="whitespace-pre-wrap">
-                            {answer.content}
-                        </p>
+                        <p className="whitespace-pre-wrap">{answer.content}</p>
                         <div className="flex flex-row gap-2">
-                            <Upvote
-                                upvotes={answer.upvotes}
-                                id={answer._id}
-                            />
-                            <Downvote
-                                downvotes={answer.downvotes}
-                                id={answer._id}
-                            />
+                            <Upvote upvotes={answer.upvotes} id={answer._id} />
+                            <Downvote downvotes={answer.downvotes} id={answer._id} />
                         </div>
                     </article>
                 );

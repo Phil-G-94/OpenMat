@@ -9,7 +9,7 @@
         "build": "tsc",
         "dev": "tsc --watch & node --watch ./dist/app.js",
         "start": "node ./dist/app.js",
-        "prettier": "npx prettier . --write"
+        "format": "npx prettier . --write"
     },
     "author": "",
     "license": "ISC",
@@ -36,7 +36,7 @@
         "tabWidth": 4,
         "semi": true,
         "singleQuote": false,
-        "printWidth": 70,
+        "printWidth": 85,
         "useTabs": false
     }
 }

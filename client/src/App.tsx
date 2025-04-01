@@ -14,30 +14,6 @@ import RequireAuth from "./pages/RequireAuth";
 import ErrorPage from "./pages/ErrorPage";
 
 function App() {
-    // const router = createBrowserRouter(
-    //     createRoutesFromElements(
-    //         <Route
-    //             path="/"
-    //             element={<RootLayout />}
-    //             errorElement={<ErrorPage />}
-    //         >
-    //             <Route index element={<HomePage />} />
-    //             <Route path="auth/signup" element={<Signup />} />
-    //             <Route path="auth/login" element={<Login />} />
-    //             <Route element={<RequireAuth />}>
-    //                 <Route
-    //                     path="questions"
-    //                     element={<QuestionForm />}
-    //                 ></Route>
-    //                 <Route
-    //                     path="questions/:questionId"
-    //                     element={<Thread />}
-    //                 />
-    //             </Route>
-    //         </Route>
-    //     )
-    // );
-
     const router = createBrowserRouter([
         {
             path: "/",

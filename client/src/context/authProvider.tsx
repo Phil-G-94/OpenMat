@@ -1,25 +1,18 @@
 import { ReactNode, useEffect, useState } from "react";
 import { AuthContext } from "./authCtx";
 
-export const AuthProvider = ({
-    children,
-}: {
-    children: ReactNode;
-}) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthed, setIsAuthed] = useState<boolean>(false);
     const [loadingAuth, setLoadingAuth] = useState<boolean>(true);
 
     const fetchAuthentication = async () => {
         try {
-            const response = await fetch(
-                "http://localhost:8080/secure",
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                }
-            );
+            const response = await fetch("http://localhost:8080/secure", {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
 
             if (response.ok) {
                 setIsAuthed(true);
@@ -39,9 +32,7 @@ export const AuthProvider = ({
     }, []);
 
     return (
-        <AuthContext.Provider
-            value={{ isAuthed, fetchAuthentication, loadingAuth }}
-        >
+        <AuthContext.Provider value={{ isAuthed, fetchAuthentication, loadingAuth }}>
             {children}
         </AuthContext.Provider>
     );

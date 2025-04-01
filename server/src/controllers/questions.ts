@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Question } from "../model/question.js";
 import { User } from "../model/user.js";
 
-const getQuestions = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const getQuestions = async (req: Request, res: Response, next: NextFunction) => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 4;
     const skip = (page - 1) * limit;
@@ -31,11 +27,7 @@ const getQuestions = async (
     }
 };
 
-const getQuestion = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const getQuestion = async (req: Request, res: Response, next: NextFunction) => {
     const questionId = req.params.questionId;
 
     try {
@@ -51,11 +43,7 @@ const getQuestion = async (
     }
 };
 
-const postQuestion = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const postQuestion = async (req: Request, res: Response, next: NextFunction) => {
     const { post_title, post_body } = req.body;
 
     try {

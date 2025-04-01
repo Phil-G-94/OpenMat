@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 
 export default function QuestionForm() {
     const navigate = useNavigate();
@@ -21,9 +21,7 @@ export default function QuestionForm() {
         false
     );
 
-    const onSubmitHandler = async (
-        event: FormEvent<HTMLFormElement>
-    ) => {
+    const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!(event.target instanceof HTMLFormElement)) {
@@ -44,6 +42,13 @@ export default function QuestionForm() {
 
         navigate("/");
     };
+
+    const errorData = !error
+        ? []
+        : Object.entries(error).map(([key, value]) => ({
+              key,
+              value: typeof value === "object" ? JSON.stringify(value) : value,
+          }));
 
     return (
         <section className="flex flex-col items-center">
@@ -88,7 +93,13 @@ export default function QuestionForm() {
                 </button>
             </form>
 
-            {error && <p>{error}</p>}
+            {errorData.map(({ key, value }) => {
+                return (
+                    <div key={key}>
+                        <p className="text-xl text-center text-red-600">{value}</p>
+                    </div>
+                );
+            })}
         </section>
     );
 }

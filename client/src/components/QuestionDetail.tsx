@@ -1,3 +1,4 @@
+import { FetchError } from "../hooks/useFetch";
 import { Question } from "../types/question";
 import { PopulatedUser } from "../types/user";
 
@@ -7,7 +8,7 @@ export default function QuestionDetail({
     loading,
 }: {
     question: Question | undefined;
-    error: string | null;
+    error: FetchError | null;
     loading: boolean;
 }) {
     const isUserPopulated = (
@@ -15,6 +16,13 @@ export default function QuestionDetail({
     ): author is PopulatedUser => {
         return typeof author !== "string" && "username" in author;
     };
+
+    const errorData = !error
+        ? []
+        : Object.entries(error).map(([key, value]) => ({
+              key,
+              value: typeof value === "object" ? JSON.stringify(value) : value,
+          }));
 
     return (
         <section>
@@ -29,9 +37,7 @@ export default function QuestionDetail({
                             <p>
                                 Posted on:{" "}
                                 {question?.createdAt
-                                    ? new Date(
-                                          question?.createdAt
-                                      ).toLocaleString()
+                                    ? new Date(question?.createdAt).toLocaleString()
                                     : "Unknown date"}
                             </p>
                             <p>
@@ -51,7 +57,15 @@ export default function QuestionDetail({
                         </div>
                     </div>
                 )}
-                {error && <p>{error}</p>}
+                {errorData.map(({ key, value }) => {
+                    return (
+                        <div key={key}>
+                            <p className="text-xl text-center text-red-600">
+                                {value}
+                            </p>
+                        </div>
+                    );
+                })}
             </article>
         </section>
     );

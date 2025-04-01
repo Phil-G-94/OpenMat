@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { ArrowDownCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Downvote({
@@ -9,9 +9,9 @@ export default function Downvote({
     downvotes: number | undefined;
     id: string;
 }) {
-    const [currentDownvotes, setCurrentDownvotes] = useState<
-        number | undefined
-    >(downvotes);
+    const [currentDownvotes, setCurrentDownvotes] = useState<number | undefined>(
+        downvotes
+    );
 
     const [triggerDownvote, { data }] = useFetch<{
         downvotes: number;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Upvote({
@@ -9,9 +9,9 @@ export default function Upvote({
     upvotes: number | undefined;
     id: string;
 }) {
-    const [currentUpvotes, setCurrentUpvotes] = useState<
-        number | undefined
-    >(upvotes);
+    const [currentUpvotes, setCurrentUpvotes] = useState<number | undefined>(
+        upvotes
+    );
 
     const [triggerUpvote, { data }] = useFetch<{
         upvotes: number;

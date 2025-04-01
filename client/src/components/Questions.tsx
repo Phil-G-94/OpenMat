@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import useFetch from "../hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import { QuestionsResponse } from "../types/question";
 import QuestionCard from "./QuestionCard";
 import Leaderboard from "./Leaderboard";
@@ -13,8 +13,7 @@ export default function Questions() {
     const [totalPages, setTotalPages] = useState(1);
 
     const url = useMemo(
-        () =>
-            `http://localhost:8080/questions?page=${page}&limit=${ITEMS_PER_PAGE}`,
+        () => `http://localhost:8080/questions?page=${page}&limit=${ITEMS_PER_PAGE}`,
         [page]
     );
 
@@ -58,9 +57,7 @@ export default function Questions() {
 
                     <section className="col-span-full md:col-span-2">
                         {loading ? (
-                            <p className="text-center">
-                                Loading questions...
-                            </p>
+                            <p className="text-center">Loading questions...</p>
                         ) : (
                             <div className="flex flex-col gap-4">
                                 {data?.questions.map((question) => {
@@ -77,9 +74,7 @@ export default function Questions() {
                 </article>
 
                 {data?.questions.length === 0 && (
-                    <p className="text-center">
-                        No questions - ask one!
-                    </p>
+                    <p className="text-center">No questions - ask one!</p>
                 )}
             </section>
 
