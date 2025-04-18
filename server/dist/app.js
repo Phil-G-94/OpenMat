@@ -31,6 +31,7 @@ app.use(
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
+app.options("*", cors());
 // middleware
 app.use(urlencoded({ extended: true }));
 app.use(json({}));

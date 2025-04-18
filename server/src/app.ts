@@ -38,6 +38,8 @@ app.use(
     })
 );
 
+app.options("*", cors());
+
 // middleware
 app.use(urlencoded({ extended: true }));
 
