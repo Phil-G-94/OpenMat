@@ -3,7 +3,7 @@ import { useFetch } from "../hooks/useFetch";
 import { LeaderboardResponse } from "../types/api";
 
 export default function Leaderboard() {
-    const url = useMemo(() => `http://localhost:8080/leaderboard`, []);
+    const url = useMemo(() => `https://openmatbackend.onrender.com/leaderboard`, []);
 
     const defaultOptions = useMemo(
         () =>

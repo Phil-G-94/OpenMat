@@ -13,7 +13,8 @@ export default function Questions() {
     const [totalPages, setTotalPages] = useState(1);
 
     const url = useMemo(
-        () => `http://localhost:8080/questions?page=${page}&limit=${ITEMS_PER_PAGE}`,
+        () =>
+            `https://openmatbackend.onrender.com/questions?page=${page}&limit=${ITEMS_PER_PAGE}`,
         [page]
     );
 

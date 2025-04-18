@@ -17,7 +17,7 @@ export default function AddAnswer({
 
     const [postAnswerForm, { error }] = useFetch<{
         body: string;
-    }>("http://localhost:8080/answers", {
+    }>("https://openmatbackend.onrender.com/answers", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -46,14 +46,17 @@ export default function AddAnswer({
     const onAIAnswerHandler = async () => {
         setLoadingAI(true);
         try {
-            const response = await fetch("http://localhost:8080/answers/ai-answer", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify({ questionId }),
-            });
+            const response = await fetch(
+                "https://openmatbackend.onrender.com/answers/ai-answer",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ questionId }),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to fetch AI answer");

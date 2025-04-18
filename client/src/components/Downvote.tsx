@@ -15,7 +15,7 @@ export default function Downvote({
 
     const [triggerDownvote, { data }] = useFetch<{
         downvotes: number;
-    }>(`http://localhost:8080/answers/${id}/downvotes`, {
+    }>(`https://openmatbackend.onrender.com/answers/${id}/downvotes`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",

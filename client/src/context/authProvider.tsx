@@ -7,12 +7,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const fetchAuthentication = async () => {
         try {
-            const response = await fetch("http://localhost:8080/secure", {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            });
+            const response = await fetch(
+                "https://openmatbackend.onrender.com/secure",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                }
+            );
 
             if (response.ok) {
                 setIsAuthed(true);

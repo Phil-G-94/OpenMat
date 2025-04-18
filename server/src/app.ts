@@ -1,5 +1,12 @@
 import dotenv from "dotenv";
-import express, { urlencoded, json, Request, Response, NextFunction } from "express";
+import express, {
+    urlencoded,
+    json,
+    Request,
+    Response,
+    NextFunction,
+    Express,
+} from "express";
 import cors from "cors";
 import { CustomError } from "./utils/error.js";
 import { router as authRoutes } from "./routes/auth.js";
@@ -15,11 +22,11 @@ import { authJWT } from "./middleware/authJWT.js";
 dotenv.config();
 
 // initialise express app
-const app = express();
+const app: Express = express();
 
 // CORS middleware
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["http://localhost:5173", "https://openmat.onrender.com"];
 
 app.use(
     cors({

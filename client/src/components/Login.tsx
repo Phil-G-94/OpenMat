@@ -11,7 +11,7 @@ export default function Login() {
         username: string;
         password: string;
     }>(
-        "http://localhost:8080/auth/login",
+        "https://openmatbackend.onrender.com/auth/login",
         {
             method: "POST",
             headers: {

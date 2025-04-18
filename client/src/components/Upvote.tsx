@@ -15,7 +15,7 @@ export default function Upvote({
 
     const [triggerUpvote, { data }] = useFetch<{
         upvotes: number;
-    }>(`http://localhost:8080/answers/${id}/upvotes`, {
+    }>(`https://openmatbackend.onrender.com/answers/${id}/upvotes`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
     });

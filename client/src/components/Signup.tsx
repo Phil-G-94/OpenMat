@@ -9,7 +9,7 @@ export default function Signup() {
         email: string;
         password: string;
     }>(
-        "http://localhost:8080/auth/signup",
+        "https://openmatbackend.onrender.com/auth/signup",
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },

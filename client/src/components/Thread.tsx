@@ -10,7 +10,7 @@ export default function Thread() {
     const { questionId } = useParams<{ questionId: string }>();
 
     const url = useMemo(
-        () => `http://localhost:8080/questions/${questionId}`,
+        () => `https://openmatbackend.onrender.com/questions/${questionId}`,
         [questionId]
     );
     const defaultOptions = useMemo(

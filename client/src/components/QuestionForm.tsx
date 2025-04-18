@@ -10,7 +10,7 @@ export default function QuestionForm() {
         title: string;
         body: string;
     }>(
-        "http://localhost:8080/questions",
+        "https://openmatbackend.onrender.com/questions",
         {
             method: "POST",
             headers: {
