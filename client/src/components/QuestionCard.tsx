@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Question } from "../types/question";
+import { Question } from "../types/api";
 
 export default function QuestionCard({ question }: { question: Question }) {
     return (
