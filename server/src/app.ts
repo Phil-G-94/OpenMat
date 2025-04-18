@@ -85,12 +85,14 @@ app.use(
 
 // start http server
 (async function startServer() {
+    const PORT = Number(process.env.PORT) || 8080;
+
     // db uri
     const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.DB_PATH}`;
 
     try {
         await connectToDatabase(dbUri);
-        app.listen(process.env.PORT || 8080, () => {
+        app.listen(PORT, "0.0.0.0", () => {
             console.log("Server is running on port", process.env.PORT || 8080);
         });
     } catch (error) {
