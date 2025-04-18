@@ -3,6 +3,8 @@ import { FormEvent, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { PopulatedUser } from "../types/api";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function AddAnswer({
     questionId,
     authorId,
@@ -17,7 +19,7 @@ export default function AddAnswer({
 
     const [postAnswerForm, { error }] = useFetch<{
         body: string;
-    }>("https://openmatbackend.onrender.com/answers", {
+    }>(`${API_BASE_URL}/answers`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

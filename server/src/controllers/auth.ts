@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { User } from "../model/user.js";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const postSignup = async (
     req: Request,
     res: Response,
@@ -87,8 +89,8 @@ const postLogin = async (
         // set token through cookies
         res.cookie("token", token, {
             httpOnly: true,
-            sameSite: "lax",
-            secure: false,
+            sameSite: isProd ? "none" : "lax",
+            secure: true,
         });
 
         res.status(200).json({

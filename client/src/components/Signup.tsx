@@ -2,6 +2,8 @@ import { FormEvent } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Signup() {
     const navigate = useNavigate();
     const [postSignupUser, { loading, error }] = useFetch<{
@@ -9,7 +11,7 @@ export default function Signup() {
         email: string;
         password: string;
     }>(
-        "https://openmatbackend.onrender.com/auth/signup",
+        `${API_BASE_URL}/auth/signup`,
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -7,14 +7,15 @@ import PageControls from "./PageControls";
 
 const ITEMS_PER_PAGE = 4;
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Questions() {
     const [page, setPage] = useState(1);
 
     const [totalPages, setTotalPages] = useState(1);
 
     const url = useMemo(
-        () =>
-            `https://openmatbackend.onrender.com/questions?page=${page}&limit=${ITEMS_PER_PAGE}`,
+        () => `${API_BASE_URL}/questions?page=${page}&limit=${ITEMS_PER_PAGE}`,
         [page]
     );
 

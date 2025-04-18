@@ -6,11 +6,13 @@ import AddAnswer from "./AddAnswer";
 import Answers from "./Answers";
 import QuestionDetail from "./QuestionDetail";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Thread() {
     const { questionId } = useParams<{ questionId: string }>();
 
     const url = useMemo(
-        () => `https://openmatbackend.onrender.com/questions/${questionId}`,
+        () => `${API_BASE_URL}/questions/${questionId}`,
         [questionId]
     );
     const defaultOptions = useMemo(

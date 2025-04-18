@@ -3,6 +3,8 @@ import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Login() {
     const navigate = useNavigate();
     const { fetchAuthentication } = useAuth();
@@ -11,7 +13,7 @@ export default function Login() {
         username: string;
         password: string;
     }>(
-        "https://openmatbackend.onrender.com/auth/login",
+        `${API_BASE_URL}/auth/login`,
         {
             method: "POST",
             headers: {

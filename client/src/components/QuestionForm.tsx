@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import { useFetch } from "../hooks/useFetch";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function QuestionForm() {
     const navigate = useNavigate();
     const [text, setText] = useState("");
@@ -10,7 +12,7 @@ export default function QuestionForm() {
         title: string;
         body: string;
     }>(
-        "https://openmatbackend.onrender.com/questions",
+        `${API_BASE_URL}/questions`,
         {
             method: "POST",
             headers: {

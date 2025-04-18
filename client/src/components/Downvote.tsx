@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { ArrowDownCircleIcon } from "@heroicons/react/20/solid";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Downvote({
     downvotes,
     id,
@@ -15,7 +17,7 @@ export default function Downvote({
 
     const [triggerDownvote, { data }] = useFetch<{
         downvotes: number;
-    }>(`https://openmatbackend.onrender.com/answers/${id}/downvotes`, {
+    }>(`${API_BASE_URL}/answers/${id}/downvotes`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",

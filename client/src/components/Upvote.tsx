@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Upvote({
     upvotes,
     id,
@@ -15,7 +17,7 @@ export default function Upvote({
 
     const [triggerUpvote, { data }] = useFetch<{
         upvotes: number;
-    }>(`https://openmatbackend.onrender.com/answers/${id}/upvotes`, {
+    }>(`${API_BASE_URL}/answers/${id}/upvotes`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
     });

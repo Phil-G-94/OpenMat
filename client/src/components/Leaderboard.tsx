@@ -2,8 +2,10 @@ import { useEffect, useMemo } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { LeaderboardResponse } from "../types/api";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function Leaderboard() {
-    const url = useMemo(() => `https://openmatbackend.onrender.com/leaderboard`, []);
+    const url = useMemo(() => `${API_BASE_URL}/leaderboard`, []);
 
     const defaultOptions = useMemo(
         () =>
